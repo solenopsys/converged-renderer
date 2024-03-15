@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {observable} from '~/oby';
+import { observable } from "../reactive";
 
 /* EXPORT */
 

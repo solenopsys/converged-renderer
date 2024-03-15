@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {disposed} from '~/oby';
+import { disposed } from "../reactive";
 
 /* EXPORT */
 

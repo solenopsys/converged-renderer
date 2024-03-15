@@ -1,20 +1,19 @@
-
 /* IMPORT */
 
-import useMemo from '~/hooks/use_memo';
-import $ from '~/methods/S';
-import resolve from '~/methods/resolve';
-import untrack from '~/methods/untrack';
-import {isFunction} from '~/utils/lang';
-import type {Observable, ObservableReadonly} from '~/types';
+import useMemo from "../hooks/use_memo";
+import $ from "../methods/S";
+import resolve from "../methods/resolve";
+import untrack from "../methods/untrack";
+import { isFunction } from "../utils/lang";
+import type { Observable, ObservableReadonly } from "../types";
 
 /* HELPERS */
 
 const COMPONENT_RE = /^_?[A-Z][a-zA-Z0-9$_-]*$/;
-const SYMBOL_AS = '__hmr_as__';
-const SYMBOL_COLD_COMPONENT = Symbol ( 'HMR.Cold' );
-const SYMBOL_HOT_COMPONENT = Symbol ( 'HMR.Hot' );
-const SYMBOL_HOT_ID = Symbol ( 'HMR.ID' );
+const SYMBOL_AS = "__hmr_as__";
+const SYMBOL_COLD_COMPONENT = Symbol("HMR.Cold");
+const SYMBOL_HOT_COMPONENT = Symbol("HMR.Hot");
+const SYMBOL_HOT_ID = Symbol("HMR.ID");
 const SOURCES = new WeakMap<{}, Observable<any>>();
 
 /* MAIN */
@@ -22,107 +21,109 @@ const SOURCES = new WeakMap<{}, Observable<any>>();
 //TODO: This seems excessively complicated, maybe it can be simplified somewhat?
 //TODO: Make this work better when a nested component is added/removed too
 
-const hmr = <T extends Function> ( accept: Function | undefined, component: T ): T => {
+const hmr = <T extends Function>(
+	accept: Function | undefined,
+	component: T,
+): T => {
+	if (accept) {
+		// Making the component hot
 
-  if ( accept ) { // Making the component hot
+		/* CHECK */
 
-    /* CHECK */
+		const cached = component[SYMBOL_HOT_COMPONENT];
 
-    const cached = component[SYMBOL_HOT_COMPONENT];
+		if (cached) return cached; // Already hot
 
-    if ( cached ) return cached; // Already hot
+		const isProvider = !isFunction(component) && "Provider" in component;
 
-    const isProvider = !isFunction ( component ) && ( 'Provider' in component );
+		if (isProvider) return component; // Context/Directive providers are not hot-reloadable
 
-    if ( isProvider ) return component; // Context/Directive providers are not hot-reloadable
+		/* HELPERS */
 
-    /* HELPERS */
+		const createHotComponent = (path: string[]): any => {
+			return <A extends unknown[], R>(...args: A): ObservableReadonly<R> => {
+				return useMemo(() => {
+					const component = path.reduce(
+						(component, key) => component[key],
+						SOURCES.get(id())?.() || source(),
+					);
+					const result = resolve(untrack(() => component(...args)));
 
-    const createHotComponent = ( path: string[] ): any => {
+					return result;
+				});
+			};
+		};
 
-      return <A extends unknown[], R> ( ...args: A ): ObservableReadonly<R> => {
+		const createHotComponentDeep = <T extends Function>(
+			component: T,
+			path: string[],
+		): T => {
+			const cached = component[SYMBOL_HOT_COMPONENT];
 
-        return useMemo ( () => {
+			if (cached) return cached;
 
-          const component = path.reduce ( ( component, key ) => component[key], SOURCES.get ( id () )?.() || source () );
-          const result = resolve ( untrack ( () => component ( ...args ) ) );
+			const hot = (component[SYMBOL_HOT_COMPONENT] = createHotComponent(path));
 
-          return result;
+			for (const key in component) {
+				const value = component[key];
 
-        });
+				if (isFunction(value) && COMPONENT_RE.test(key)) {
+					// A component
 
-      };
+					hot[key] = createHotComponentDeep(value, [...path, key]);
+				} else {
+					// Something else
 
-    };
+					hot[key] = value;
+				}
+			}
 
-    const createHotComponentDeep = <T extends Function> ( component: T, path: string[] ): T => {
+			return hot;
+		};
 
-      const cached = component[SYMBOL_HOT_COMPONENT];
+		const onAccept = (module: { default: T }): void => {
+			const hot =
+				module[component[SYMBOL_AS]] ||
+				module[component.name] ||
+				module.default;
 
-      if ( cached ) return cached;
+			if (!hot)
+				return console.error(
+					`[hmr] Failed to handle update for "${component.name}" component:\n\n`,
+					component,
+				);
 
-      const hot = component[SYMBOL_HOT_COMPONENT] = createHotComponent ( path );
+			const cold = hot[SYMBOL_COLD_COMPONENT] || hot;
 
-      for ( const key in component ) {
+			hot[SYMBOL_HOT_ID]?.(id());
+			SOURCES.get(id())?.(() => cold);
+		};
 
-        const value = component[key];
+		/* MAIN */
 
-        if ( isFunction ( value ) && COMPONENT_RE.test ( key ) ) { // A component
+		const id = $({});
+		const source = $(component);
 
-          hot[key] = createHotComponentDeep ( value, [...path, key] );
+		SOURCES.set(id(), source);
 
-        } else { // Something else
+		const cold = component[SYMBOL_COLD_COMPONENT] || component;
+		const hot = createHotComponentDeep(component, []);
 
-          hot[key] = value;
+		cold[SYMBOL_HOT_COMPONENT] = hot;
+		hot[SYMBOL_COLD_COMPONENT] = cold;
+		hot[SYMBOL_HOT_COMPONENT] = hot;
+		hot[SYMBOL_HOT_ID] = id;
 
-        }
+		accept(onAccept);
 
-      }
+		/* RETURN */
 
-      return hot;
+		return hot;
+	} else {
+		// Returning the component as is
 
-    };
-
-    const onAccept = ( module: { default: T } ): void => {
-
-      const hot = module[component[SYMBOL_AS]] || module[component.name] || module.default;
-
-      if ( !hot ) return console.error ( `[hmr] Failed to handle update for "${component.name}" component:\n\n`, component );
-
-      const cold = hot[SYMBOL_COLD_COMPONENT] || hot;
-
-      hot[SYMBOL_HOT_ID]?.( id () );
-      SOURCES.get ( id () )?.( () => cold );
-
-    };
-
-    /* MAIN */
-
-    const id = $({});
-    const source = $(component);
-
-    SOURCES.set ( id (), source );
-
-    const cold = component[SYMBOL_COLD_COMPONENT] || component;
-    const hot = createHotComponentDeep ( component, [] );
-
-    cold[SYMBOL_HOT_COMPONENT] = hot;
-    hot[SYMBOL_COLD_COMPONENT] = cold;
-    hot[SYMBOL_HOT_COMPONENT] = hot;
-    hot[SYMBOL_HOT_ID] = id;
-
-    accept ( onAccept );
-
-    /* RETURN */
-
-    return hot;
-
-  } else { // Returning the component as is
-
-    return component;
-
-  }
-
+		return component;
+	}
 };
 
 /* EXPORT */

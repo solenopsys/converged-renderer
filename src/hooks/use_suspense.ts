@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {suspense} from '~/oby';
+import { suspense } from "../reactive";
 
 /* EXPORT */
 

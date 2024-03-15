@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {untrack} from '~/oby';
+import { untrack } from "../reactive";
 
 /* EXPORT */
 

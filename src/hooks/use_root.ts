@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {root} from '~/oby';
+import { root } from "../reactive";
 
 /* EXPORT */
 

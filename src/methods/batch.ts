@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {batch} from '~/oby';
+import { batch } from "../reactive";
 
 /* EXPORT */
 

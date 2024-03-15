@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {isObservable} from '~/oby';
+import { isObservable } from "../reactive";
 
 /* EXPORT */
 

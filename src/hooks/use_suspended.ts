@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {suspended} from '~/oby';
+import { suspended } from "../reactive";
 
 /* EXPORT */
 

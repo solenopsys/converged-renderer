@@ -1,21 +1,18 @@
-
 /* IMPORT */
 
-import {useCleanup} from '~/hooks';
+import { useCleanup } from "../hooks";
 
 /* MAIN */
 
 const useCheapDisposed = (): (() => boolean) => {
+	let disposed = false;
 
-  let disposed = false;
+	const get = (): boolean => disposed;
+	const set = (): boolean => (disposed = true);
 
-  const get = (): boolean => disposed;
-  const set = (): boolean => disposed = true;
+	useCleanup(set);
 
-  useCleanup ( set );
-
-  return get;
-
+	return get;
 };
 
 /* EXPORT */

@@ -1,22 +1,15 @@
-
 /* IMPORT */
 
-import isServer from '~/methods/is_server';
+import isServer from "./methods/is_server";
 
 /* MAIN */
 
-if ( !isServer () ) {
+if (!isServer()) {
+	const isLoaded = !!globalThis.CONVERGED;
 
-  const isLoaded = !!globalThis.VOBY;
-
-  if ( isLoaded ) {
-
-    throw new Error ( 'Voby has already been loaded' );
-
-  } else {
-
-    globalThis.VOBY = true;
-
-  }
-
+	if (isLoaded) {
+		throw new Error("Renderer has already been loaded");
+	} else {
+		globalThis.CONVERGED = true;
+	}
 }

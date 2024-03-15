@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {selector} from '~/oby';
+import { selector } from "../reactive";
 
 /* EXPORT */
 

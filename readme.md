@@ -1,23 +1,5 @@
-
-<p align="center">
-  <a href="https://voby.dev">
-    <img src="./resources/banner/svg/banner-light-rounded.svg" alt="Voby's Banner" width="640px" height="320px">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://discord.gg/E6pK7VpnjC">
-    <img src="./resources/discord/button.png" alt="Join The Discord Chat" width="175px" height="56.5px">
-  </a>
-  <a href="https://codesandbox.io/s/voby-playground-7w2pxg">
-    <img src="./resources/playground/button.png" alt="Open The Playground" width="175px" height="56.5px">
-  </a>
-  <a href="https://opencollective.com/voby">
-    <img src="./resources/collective/button.png" alt="Donate With Open Collective" width="175px" height="56.5px">
-  </a>
-</p>
-
-# [Voby](https://voby.dev)
+# Converged Renderer (renderer)
+Based on [Voby](https://github.com/vobyjs/voby)
 
 A high-performance framework with fine-grained observable/signal-based reactivity for building rich applications.
 
@@ -37,23 +19,6 @@ This works similarly to [Solid](https://www.solidjs.com), but without a custom B
 - **Observable-based**: observables, also known as "signals", are at the core of our reactivity system. The way it works is very different from a React-like system, it may be more challenging to learn, but it's well worth the effort.
 - **Work in progress**: this is probably beta software, I'm working on it because I need something with great performance for [Notable](https://github.com/notable/notable), I'm allergic to third-party dependencies, I'd like something with an API that resonates with me, and I wanted to deeply understand how the more solid [Solid](https://www.solidjs.com), which you should also check out, works.
 
-## Demos
-
-You can find some demos and benchmarks below, more demos are contained inside the repository.
-
-- Playground (CodeSandbox): https://codesandbox.io/s/voby-playground-7w2pxg
-- Playground (StackBlitz): https://stackblitz.com/edit/vitejs-vite-azlrzl?file=src%2Fcounter.tsx
-- Benchmark: https://krausest.github.io/js-framework-benchmark/current.html
-- Counter: https://codesandbox.io/s/voby-demo-counter-23fv5
-- Clock: https://codesandbox.io/s/voby-demo-clock-w1e7yb
-- Emoji Counter: https://codesandbox.io/s/voby-demo-emoji-counter-j91iz2
-- HyperScript: https://codesandbox.io/s/voby-demo-hyperscript-h4rf38
-- HTML Template Literal: https://codesandbox.io/s/voby-demo-html-lvfeyo
-- Single-file HTML: https://codesandbox.io/s/voby-demo-html-dueygt?file=/public/index.html
-- Spiral: https://codesandbox.io/s/voby-demo-spiral-ux33p6
-- Store Counter: https://codesandbox.io/s/voby-demo-store-counter-kvoqrw
-- Triangle: https://codesandbox.io/s/voby-demo-triangle-l837v0
-- Boxes: https://codesandbox.io/s/voby-demo-boxes-wx6rqb
 
 ## APIs
 
@@ -83,9 +48,9 @@ You can find some demos and benchmarks below, more demos are contained inside th
 
 ## Usage
 
-This framework is simply a view layer built on top of the Observable library [`oby`](https://github.com/fabiospampinato/oby), knowing how that works is necessary to understand how this works.
+This framework is simply a view layer built on top of the Observable library [`reactive`](https://github.com/solenopsys/converged-reactive), knowing how that works is necessary to understand how this works.
 
-This framework basically re-exports everything that `oby` exports, sometimes with a slightly different interface, adjusted for usage as components or hooks, plus some additional functions.
+This framework basically re-exports everything that `reactive` exports, sometimes with a slightly different interface, adjusted for usage as components or hooks, plus some additional functions.
 
 ### Methods
 
@@ -93,11 +58,11 @@ The following top-level functions are provided.
 
 #### `$`
 
-This function is just the default export of `oby`, it can be used to wrap a value in an observable.
+This function is just the default export of `reactive`, it can be used to wrap a value in an observable.
 
-No additional methods are attached to this function. Everything that `oby` attaches to it is instead exported as components and hooks.
+No additional methods are attached to this function. Everything that `reactive` attaches to it is instead exported as components and hooks.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#core).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#core).
 
 Interface:
 
@@ -110,7 +75,7 @@ function $ <T> ( value: T, options?: ObservableOptions<T> ): Observable<T>;
 Usage:
 
 ```tsx
-import {$} from 'voby';
+import {$} from 'renderer';
 
 // Create an observable without an initial value
 
@@ -153,7 +118,7 @@ o ( () => noop );
 
 This function unwraps a potentially observable value.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#get).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#get).
 
 Interface:
 
@@ -164,7 +129,7 @@ function $$ <T> ( value: T ): (T extends ObservableReadonly<infer U> ? U : T);
 Usage:
 
 ```tsx
-import {$$} from 'voby';
+import {$$} from 'renderer';
 
 // Getting the value out of an observable
 
@@ -190,7 +155,7 @@ $$ ( 123 ); // => 123
 
 This function prevents effects from firing until the function passed to it resolves. It's largely only useful when the passed function is asynchronous, as otherwise the reactivity system is lazy so effects won't be over-executed anyway.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#batch).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#batch).
 
 Interface:
 
@@ -202,9 +167,9 @@ function batch <T> ( value: T ): Promise<Awaited<T>>;
 Usage:
 
 ```tsx
-import {batch} from 'voby';
+import {batch} from 'renderer';
 
-batch // => Same as require ( 'oby' ).batch
+batch // => Same as require ( 'reactive' ).batch
 ```
 
 #### `createContext`
@@ -225,7 +190,7 @@ function createContext <T> ( defaultValue?: T ): Context<T>;
 Usage:
 
 ```tsx
-import {createContext, useContext} from 'voby';
+import {createContext, useContext} from 'renderer';
 
 const App = () => {
   const Context = createContext ( 123 );
@@ -275,7 +240,7 @@ function createDirective <T extends unknown[] = []> ( name: string, fn: Directiv
 Usage:
 
 ```tsx
-import {createDirective, useEffect} from 'voby';
+import {createDirective, useEffect} from 'renderer';
 
 // First of all if you are using TypeScript you should extend the "JSX.Directives" interface, so that TypeScript will know about your new directive
 
@@ -329,14 +294,14 @@ function createElement <P = {}> ( component: JSX.Component<P>, props: P | null, 
 Usage:
 
 ```tsx
-import {createElement} from 'voby';
+import {createElement} from 'renderer';
 
 const element = createElement ( 'div', { class: 'foo' }, 'child' ); // => () => HTMLDivElement
 ```
 
 #### `h`
 
-This function is just an alias for the `createElement` function, it's more convenient to use if you want to use Voby in hyperscript mode just because it has a much shorter name.
+This function is just an alias for the `createElement` function, it's more convenient to use if you want to use renderer in hyperscript mode just because it has a much shorter name.
 
 Interface:
 
@@ -347,7 +312,7 @@ function h <P = {}> ( component: JSX.Component<P>, props: P | null, ...children:
 Usage:
 
 ```tsx
-import {h} from 'voby';
+import {h} from 'renderer';
 
 const element = h ( 'div', { class: 'foo' }, 'child' ); // => () => HTMLDivElement
 ```
@@ -356,7 +321,7 @@ const element = h ( 'div', { class: 'foo' }, 'child' ); // => () => HTMLDivEleme
 
 This function wraps a component and makes it HMR-aware, for implementations of HMR like Vite's, this makes the component refresh itself and its children without requiring a reload of the whole page.
 
-For an automated way to make all your components HMR-aware check out [`voby-vite`](https://github.com/vobyjs/voby-vite) instead.
+For an automated way to make all your components HMR-aware check out [`renderer-vite`](https://github.com/rendererjs/renderer-vite) instead.
 
 Interface:
 
@@ -367,7 +332,7 @@ function hmr <T extends Function> ( accept: Function, component: T ): T;
 Usage:
 
 ```tsx
-import {hmr} from 'voby';
+import {hmr} from 'renderer';
 
 // Define a component
 
@@ -404,7 +369,7 @@ function html ( strings: TemplateStringsArray, ...values: any[] ): JSX.Element;
 Usage:
 
 ```tsx
-import {html, If} from 'voby';
+import {html, If} from 'renderer';
 
 const Counter = (): JSX.Element => {
   const value = $(0);
@@ -454,7 +419,7 @@ function isBatching (): boolean;
 Usage:
 
 ```tsx
-import {batch, isBatching} from 'voby';
+import {batch, isBatching} from 'renderer';
 
 // Checking if currently batching
 
@@ -482,7 +447,7 @@ function isObservable <T = unknown> ( value: unknown ): value is Observable<T> |
 Usage:
 
 ```tsx
-import {$, isObservable} from 'voby';
+import {$, isObservable} from 'renderer';
 
 isObservable ( 123 ); // => false
 isObservable ( $(123) ); // => true
@@ -501,7 +466,7 @@ function isServer (): boolean;
 Usage:
 
 ```tsx
-import {isServer} from 'voby';
+import {isServer} from 'renderer';
 
 isServer (); // => true or false
 ```
@@ -519,7 +484,7 @@ function isStore ( value: unknown ): boolean;
 Usage:
 
 ```tsx
-import {store, isStore} from 'voby';
+import {store, isStore} from 'renderer';
 
 isStore ( {} ); // => false
 isStore ( store ( {} ) ); // => true
@@ -544,7 +509,7 @@ function lazy <P = {}> ( fetcher: LazyFetcher<P> ): LazyResult<P>;
 Usage:
 
 ```ts
-import {lazy} from 'voby';
+import {lazy} from 'renderer';
 
 const LazyComponent = lazy ( () => import ( './component' ) );
 ```
@@ -562,7 +527,7 @@ function render ( child: JSX.Element, parent?: HTMLElement | null ): Disposer;
 Usage:
 
 ```tsx
-import {render} from 'voby';
+import {render} from 'renderer';
 
 const App = () => <p>Hello, World!</p>;
 
@@ -588,7 +553,7 @@ function renderToString ( child: JSX.Element ): Promise<string>;
 Usage:
 
 ```tsx
-import {renderToString} from 'voby';
+import {renderToString} from 'renderer';
 
 const App = () => <p>Hello, World!</p>;
 
@@ -601,7 +566,7 @@ This function basically resolves any reactivity inside the passed argument, basi
 
 You may never need to use this function yourself, but it's necessary internally at times to make sure that a child value is properly tracked by its parent computation.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#resolve).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#resolve).
 
 Interface:
 
@@ -618,16 +583,16 @@ function resolve <T> ( value: T ): T extends Resolvable ? T : never;
 Usage:
 
 ```tsx
-import {resolve} from 'voby';
+import {resolve} from 'renderer';
 
-resolve // => Same as require ( 'oby' ).resolve
+resolve // => Same as require ( 'reactive' ).resolve
 ```
 
 #### `store`
 
 This function returns a deeply reactive version of the passed object, where property accesses and writes are automatically interpreted as Observables reads and writes for you.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#store).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#store).
 
 Interface:
 
@@ -638,9 +603,9 @@ function store <T> ( value: T, options?: StoreOptions ): T;
 Usage:
 
 ```tsx
-import {store} from 'voby';
+import {store} from 'renderer';
 
-store // => Same as require ( 'oby' ).store
+store // => Same as require ( 'reactive' ).store
 ```
 
 #### `template`
@@ -660,7 +625,7 @@ function template <P = {}> ( fn: (( props: P ) => JSX.Element) ): (( props: P ) 
 Usage:
 
 ```tsx
-import {template} from 'voby';
+import {template} from 'renderer';
 
 const Row = template ( ({ id, cls, label, onSelect, onRemove }) => { // Now Row is super fast to instantiate
   return (
@@ -689,7 +654,7 @@ const Table = () => {
 
 This function forces effects scheduled for execution to be executed immediately, bypassing automatic or manual batching.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#tick).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#tick).
 
 Interface:
 
@@ -700,16 +665,16 @@ function tick (): void;
 Usage:
 
 ```tsx
-import {tick} from 'voby';
+import {tick} from 'renderer';
 
-tick // => Same as require ( 'oby' ).tick
+tick // => Same as require ( 'reactive' ).tick
 ```
 
 #### `untrack`
 
 This function executes the provided function without creating dependencies on observables retrieved inside it.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#untrack).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#untrack).
 
 Interface:
 
@@ -721,9 +686,9 @@ function untrack <T> ( value: T ): T;
 Usage:
 
 ```tsx
-import {untrack} from 'voby';
+import {untrack} from 'renderer';
 
-untrack // => Same as require ( 'oby' ).untrack
+untrack // => Same as require ( 'reactive' ).untrack
 ```
 
 ### Components
@@ -745,7 +710,7 @@ function Dynamic <P = {}> ( props: { component: ObservableMaybe<JSX.Component<P>
 Usage:
 
 ```tsx
-import {Dynamic} from 'voby';
+import {Dynamic} from 'renderer';
 
 const App = () => {
   const heading = 'h2';
@@ -770,7 +735,7 @@ function ErrorBoundary ( props: { fallback: JSX.Element | (( props: { error: Err
 Usage:
 
 ```tsx
-import {ErrorBoundary} from 'voby';
+import {ErrorBoundary} from 'renderer';
 
 const Fallback = ({ reset, error }: { reset: () => void, error: Error }) => {
   return (
@@ -800,7 +765,7 @@ This component is the reactive alternative to natively mapping over an array.
 
 It must be called with an array, or a function that returns an array, of _unique_ values, and each of them are passed to the child function to render something.
 
-It can be used to map over values either with a keyed (default) or unkeyed (opt-in) strategy. Read [this](https://www.stefankrause.net/wp/?p=342) for some details about the differences between those, and the [upstream documentation](https://github.com/fabiospampinato/oby#for).
+It can be used to map over values either with a keyed (default) or unkeyed (opt-in) strategy. Read [this](https://www.stefankrause.net/wp/?p=342) for some details about the differences between those, and the [upstream documentation](https://github.com/solenopsys/converged-reactive#for).
 
 Interface:
 
@@ -812,7 +777,7 @@ function For <T> ( props: { values?: FunctionMaybe<readonly T[]>, fallback?: JSX
 Usage:
 
 ```tsx
-import {For} from 'voby';
+import {For} from 'renderer';
 
 const App = () => {
   const numbers = [1, 2, 3, 4, 5];
@@ -839,7 +804,7 @@ function Fragment ( props: { children: JSX.Element }): JSX.Element;
 Usage:
 
 ```tsx
-import {Fragment} from 'voby';
+import {Fragment} from 'renderer';
 
 const App = () => {
   return (
@@ -868,7 +833,7 @@ function If <T> ( props: { when: FunctionMaybe<T>, fallback?: JSX.Element, child
 Usage:
 
 ```tsx
-import {If} from 'voby';
+import {If} from 'renderer';
 
 const App = () => {
   const visible = $(false);
@@ -901,7 +866,7 @@ function KeepAlive ( props: { id: FunctionMaybe<string>, ttl?: FunctionMaybe<num
 Usage:
 
 ```tsx
-import {KeepAlive} from 'voby';
+import {KeepAlive} from 'renderer';
 
 // Render some expensive component inside a KeepAlive
 
@@ -933,7 +898,7 @@ function Portal ( props: { when: boolean, mount?: JSX.Element, wrapper?: JSX.Ele
 Usage:
 
 ```tsx
-import {Portal} from 'voby';
+import {Portal} from 'renderer';
 
 const Modal = () => {
   // Some modal component maybe...
@@ -967,7 +932,7 @@ function Suspense ( props: { when?: FunctionMaybe<unknown>, fallback?: JSX.Eleme
 Usage:
 
 ```tsx
-import {Suspense} from 'voby';
+import {Suspense} from 'renderer';
 
 const App = () => {
   const Content = () => {
@@ -1005,7 +970,7 @@ Switch.Default = function ( props: { children: JSX.Element } ): (() => JSX.Eleme
 Usage:
 
 ```tsx
-import {Switch} from 'voby';
+import {Switch} from 'renderer';
 
 const App = () => {
   const value = $(0);
@@ -1046,7 +1011,7 @@ function Ternary ( props: { when: FunctionMaybe<unknown>, children: [JSX.Element
 Usage:
 
 ```tsx
-import {Ternary} from 'voby';
+import {Ternary} from 'renderer';
 
 const App = () => {
   const visible = $(false);
@@ -1067,13 +1032,13 @@ const App = () => {
 
 The following core hooks are provided.
 
-Most of these are just functions that `oby` provides, re-exported as `use*` functions.
+Most of these are just functions that `reactive` provides, re-exported as `use*` functions.
 
 #### `useBoolean`
 
 This hook is like the reactive equivalent of the `!!` operator, it returns you a boolean, or a function to a boolean, depending on the input that you give it.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#boolean).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#boolean).
 
 Interface:
 
@@ -1084,16 +1049,16 @@ function useBoolean ( value: FunctionMaybe<unknown> ): FunctionMaybe<boolean>;
 Usage:
 
 ```tsx
-import {useBoolean} from 'voby';
+import {useBoolean} from 'renderer';
 
-useBoolean // => Same as require ( 'oby' ).boolean
+useBoolean // => Same as require ( 'reactive' ).boolean
 ```
 
 #### `useCleanup`
 
 This hook registers a function to be called when the parent computation is disposed.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#cleanup).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#cleanup).
 
 Interface:
 
@@ -1104,9 +1069,9 @@ function useCleanup ( fn: () => void ): void;
 Usage:
 
 ```tsx
-import {useCleanup} from 'voby';
+import {useCleanup} from 'renderer';
 
-useCleanup // => Same as require ( 'oby' ).cleanup
+useCleanup // => Same as require ( 'reactive' ).cleanup
 ```
 
 #### `useContext`
@@ -1122,7 +1087,7 @@ function useContext <T> ( context: Context<T> ): T | undefined;
 Usage:
 
 ```tsx
-import {createContext, useContext} from 'voby';
+import {createContext, useContext} from 'renderer';
 
 const App = () => {
   const ctx = createContext ( 123 );
@@ -1135,7 +1100,7 @@ const App = () => {
 
 This hook returns a boolean read-only observable that is set to `true` when the parent computation gets disposed of.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#disposed).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#disposed).
 
 Interface:
 
@@ -1146,16 +1111,16 @@ function useDisposed (): ObservableReadonly<boolean>;
 Usage:
 
 ```tsx
-import {useDisposed} from 'voby';
+import {useDisposed} from 'renderer';
 
-useDisposed // => Same as require ( 'oby' ).disposed
+useDisposed // => Same as require ( 'reactive' ).disposed
 ```
 
 #### `useEffect`
 
 This hook registers a function to be called when any of its dependencies change. If a function is returned it's automatically registered as a cleanup function.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#effect).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#effect).
 
 Interface:
 
@@ -1166,9 +1131,9 @@ function useEffect ( fn: () => (() => void) | void ): (() => void);
 Usage:
 
 ```tsx
-import {useEffect} from 'voby';
+import {useEffect} from 'renderer';
 
-useEffect // => Same as require ( 'oby' ).effect
+useEffect // => Same as require ( 'reactive' ).effect
 ```
 
 #### `useMemo`
@@ -1177,7 +1142,7 @@ This hook is the crucial other ingredient that we need, other than observables t
 
 This hook registers a function to be called when any of its dependencies change, and the return of that function is wrapped in a read-only observable and returned.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#memo).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#memo).
 
 Interface:
 
@@ -1188,9 +1153,9 @@ function useMemo <T> ( fn: () => T, options?: MemoOptions<T | undefined> ): Obse
 Usage:
 
 ```tsx
-import {useMemo} from 'voby';
+import {useMemo} from 'renderer';
 
-useMemo // => Same as require ( 'oby' ).memo
+useMemo // => Same as require ( 'reactive' ).memo
 ```
 
 #### `usePromise`
@@ -1208,7 +1173,7 @@ function usePromise <T> ( promise: FunctionMaybe<Promise<T>> ): ObservableReadon
 Usage:
 
 ```tsx
-import {usePromise} from 'voby';
+import {usePromise} from 'renderer';
 
 const App = () => {
   const request = fetch ( 'https://my.api' ).then ( res => res.json ( 0 ) );
@@ -1226,7 +1191,7 @@ const App = () => {
 
 This hook creates a read-only observable out of another observable.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#readonly).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#readonly).
 
 Interface:
 
@@ -1237,9 +1202,9 @@ function useReadonly <T> ( observable: Observable<T> | ObservableReadonly<T> ): 
 Usage:
 
 ```tsx
-import {useReadonly} from 'voby';
+import {useReadonly} from 'renderer';
 
-useReadonly // => Same as require ( 'oby' ).readonly
+useReadonly // => Same as require ( 'reactive' ).readonly
 ```
 
 #### `useResolved`
@@ -1252,14 +1217,12 @@ This is useful for handling reactive and non reactive values the same way. Usual
 
 This is potentially a more convenient version of `$$`, made especially for handling nicely arguments passed that your hooks receive that may or may not be observables.
 
-Interface:
 
-> The precise interface for this function is insane, you can find it here: https://github.com/fabiospampinato/voby/blob/master/src/hooks/use_resolved.ts
 
 Usage:
 
 ```tsx
-import {$, useResolved} from 'voby';
+import {$, useResolved} from 'renderer';
 
 useResolved ( 123 ); // => 123
 
@@ -1297,7 +1260,7 @@ function useResource <T> ( fetcher: (() => ObservableMaybe<PromiseMaybe<T>>) ): 
 Usage:
 
 ```tsx
-import {useResource} from 'voby';
+import {useResource} from 'renderer';
 
 const fetcher = () => fetch ( 'https://my.api' );
 
@@ -1308,7 +1271,7 @@ const resource = useResource ( fetcher );
 
 This hook creates a new computation root, detached from any parent computation.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#root).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#root).
 
 Interface:
 
@@ -1319,16 +1282,16 @@ function useRoot <T> ( fn: ( dispose: () => void ) => T ): T;
 Usage:
 
 ```tsx
-import {useRoot} from 'voby';
+import {useRoot} from 'renderer';
 
-useRoot // => Same as require ( 'oby' ).root
+useRoot // => Same as require ( 'reactive' ).root
 ```
 
 #### `useSelector`
 
 This hook massively optimizes `isSelected` kind of workloads.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#selector).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#selector).
 
 Interface:
 
@@ -1341,16 +1304,16 @@ function useSelector <T> ( source: () => T | ObservableReadonly<T> ): SelectorFu
 Usage:
 
 ```tsx
-import {useSelector} from 'voby';
+import {useSelector} from 'renderer';
 
-useSelector // => Same as require ( 'oby' ).selector
+useSelector // => Same as require ( 'reactive' ).selector
 ```
 
 #### `useSuspended`
 
 This hook returns a read-only observable that tells you if the closest suspense boundary is currently suspended or not.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#suspended).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#suspended).
 
 Interface:
 
@@ -1361,16 +1324,16 @@ function useSuspended (): ObservableReadonly<boolean>;
 Usage:
 
 ```tsx
-import {useSuspended} from 'voby';
+import {useSuspended} from 'renderer';
 
-useSuspended // => Same as require ( 'oby' ).suspended
+useSuspended // => Same as require ( 'reactive' ).suspended
 ```
 
 #### `useUntracked`
 
 This hook returns an untracked version of a value.
 
-[Read upstream documentation](https://github.com/fabiospampinato/oby#untracked).
+[Read upstream documentation](https://github.com/solenopsys/converged-reactive#untracked).
 
 Interface:
 
@@ -1382,9 +1345,9 @@ function useUntracked <T> ( value: T ): () => T;
 Usage:
 
 ```tsx
-import {useUntracked} from 'voby';
+import {useUntracked} from 'renderer';
 
-useUntracked // => Same as require ( 'oby' ).untracked
+useUntracked // => Same as require ( 'reactive' ).untracked
 ```
 
 ### Hooks <sub>web</sub>
@@ -1406,7 +1369,7 @@ function useAbortController ( signals?: ArrayMaybe<AbortSignal> ): AbortControll
 Usage:
 
 ```tsx
-import {useAbortController} from 'voby';
+import {useAbortController} from 'renderer';
 
 const controller = useAbortController ();
 ```
@@ -1424,7 +1387,7 @@ function useAbortSignal ( signals?: ArrayMaybe<AbortSignal> ): AbortSignal;
 Usage:
 
 ```tsx
-import {useAbortSignal} from 'voby';
+import {useAbortSignal} from 'renderer';
 
 const signal = useAbortSignal ();
 ```
@@ -1442,7 +1405,7 @@ function useAnimationFrame ( callback: ObservableMaybe<FrameRequestCallback> ): 
 Usage:
 
 ```tsx
-import {useAnimationFrame} from 'voby';
+import {useAnimationFrame} from 'renderer';
 
 useAnimationFrame ( () => console.log ( 'called' ) );
 ```
@@ -1460,7 +1423,7 @@ function useAnimationLoop ( callback: ObservableMaybe<FrameRequestCallback> ): D
 Usage:
 
 ```tsx
-import {useAnimationLoop} from 'voby';
+import {useAnimationLoop} from 'renderer';
 
 useAnimationLoop ( () => console.log ( 'called' ) );
 ```
@@ -1478,7 +1441,7 @@ function useEventListener ( target: FunctionMaybe<EventTarget>, event: FunctionM
 Usage:
 
 ```tsx
-import {useEventListener} from 'voby';
+import {useEventListener} from 'renderer';
 
 useEventListener ( document, 'click', console.log );
 ```
@@ -1498,7 +1461,7 @@ function useFetch ( request: FunctionMaybe<RequestInfo>, init?: FunctionMaybe<Re
 Usage:
 
 ```tsx
-import {useFetch} from 'voby';
+import {useFetch} from 'renderer';
 
 const App = () => {
   const resource = useFetch ( 'https://my.api' );
@@ -1524,7 +1487,7 @@ function useIdleCallback ( callback: ObservableMaybe<IdleRequestCallback>, optio
 Usage:
 
 ```tsx
-import {useIdleCallback} from 'voby';
+import {useIdleCallback} from 'renderer';
 
 useIdleCallback ( () => console.log ( 'called' ) );
 ```
@@ -1542,7 +1505,7 @@ function useIdleLoop ( callback: ObservableMaybe<IdleRequestCallback>, options?:
 Usage:
 
 ```tsx
-import {useIdleLoop} from 'voby';
+import {useIdleLoop} from 'renderer';
 
 useIdleLoop ( () => console.log ( 'called' ) );
 ```
@@ -1560,7 +1523,7 @@ function useInterval ( callback: ObservableMaybe<Callback>, ms?: FunctionMaybe<n
 Usage:
 
 ```tsx
-import {useInterval} from 'voby';
+import {useInterval} from 'renderer';
 
 useInterval ( () => console.log ( 'called' ), 1000 );
 ```
@@ -1578,7 +1541,7 @@ function useMicrotask ( fn: () => void ): void;
 Usage:
 
 ```tsx
-import {useMicrotask} from 'voby';
+import {useMicrotask} from 'renderer';
 
 useMicrotask ( () => console.log ( 'called' ) );
 ```
@@ -1596,7 +1559,7 @@ function useTimeout ( callback: ObservableMaybe<Callback>, ms?: FunctionMaybe<nu
 Usage:
 
 ```tsx
-import {useTimeout} from 'voby';
+import {useTimeout} from 'renderer';
 
 useTimeout ( () => console.log ( 'called' ), 1000 );
 ```
@@ -1618,8 +1581,8 @@ type Context<T = unknown> = {
 Usage:
 
 ```ts
-import {useContext} from 'voby';
-import type {Context} from 'voby';
+import {useContext} from 'renderer';
+import type {Context} from 'renderer';
 
 // Create an alternative useContext that throws if the context is not available
 
@@ -1647,8 +1610,8 @@ type Directive<Arguments extends unknown[] = []> = {
 Usage:
 
 ```ts
-import {$$, useEffect} from 'voby';
-import type {Directive, FunctionMaybe} from 'voby';
+import {$$, useEffect} from 'renderer';
+import type {Directive, FunctionMaybe} from 'renderer';
 
 // Example hook for turning a directive into a hook
 
@@ -1678,7 +1641,7 @@ type DirectiveOptions = {
 Usage:
 
 ```tsx
-import {createDirective} from 'voby';
+import {createDirective} from 'renderer';
 
 // Create an regular, non-immediate, directive
 
@@ -1709,7 +1672,7 @@ type EffectOptions = {
 Usage:
 
 ```tsx
-import {useEffect} from 'voby';
+import {useEffect} from 'renderer';
 
 // Make a regular asynchronous effect
 
@@ -1751,7 +1714,7 @@ type FunctionMaybe<T> = (() => T) | T;
 Usage:
 
 ```tsx
-import type {FunctionMaybe} from 'voby';
+import type {FunctionMaybe} from 'renderer';
 
 const SomeConditionalComponent = ( when: FunctionMaybe<boolean>, value: string ): JSX.Element => {
   return (
@@ -1780,7 +1743,7 @@ type Observable<T> = {
 Usage:
 
 ```tsx
-import type {Observable} from 'voby';
+import type {Observable} from 'renderer';
 
 const fn = ( value: Observable<boolean> ): void => {
   value (); // Getting
@@ -1805,7 +1768,7 @@ type ObservableLike<T> = {
 Usage:
 
 ```tsx
-import type {ObservableLike} from 'voby';
+import type {ObservableLike} from 'renderer';
 
 const fn = ( value: ObservableLike<boolean> ): void => {
   value (); // Getting
@@ -1829,7 +1792,7 @@ type ObservableReadonly<T> = {
 Usage:
 
 ```tsx
-import type {ObservableReadonly} from 'voby';
+import type {ObservableReadonly} from 'renderer';
 
 const fn = ( value: ObservableReadonly<boolean> ): void => {
   value (); // Getting
@@ -1852,7 +1815,7 @@ type ObservableReadonlyLike<T> = {
 Usage:
 
 ```tsx
-import type {ObservableReadonlyLike} from 'voby';
+import type {ObservableReadonlyLike} from 'renderer';
 
 const fn = ( value: ObservableReadonlyLike<boolean> ): void => {
   value (); // Getting
@@ -1875,7 +1838,7 @@ type ObservableMaybe<T> = Observable<T> | ObservableReadonly<T> | T;
 Usage:
 
 ```tsx
-import type {ObservableMaybe} from 'voby';
+import type {ObservableMaybe} from 'renderer';
 
 const Button = ({ label }: { label: ObservableMaybe<string> }): JSX.Element => {
   return <button>{label}</button>;
@@ -1898,7 +1861,7 @@ type MemoOptions<T> = {
 Usage:
 
 ```tsx
-import {useMemo} from 'voby';
+import {useMemo} from 'renderer';
 
 // Make a regular asynchronous memo
 
@@ -1928,8 +1891,8 @@ type ObservableOptions<T> = {
 Usage:
 
 ```tsx
-import type {Observable, ObservableOptions} from 'voby';
-import {$} from 'voby';
+import type {Observable, ObservableOptions} from 'renderer';
+import {$} from 'renderer';
 
 const createTimestamp = ( options?: ObservableOptions ): Observable<number> => {
   return $( Date.now (), options );
@@ -1960,7 +1923,7 @@ type Resource<T> = ObservableReadonly<ResourceStatic<T>> & ResourceFunction<T>;
 Usage:
 
 ```tsx
-import type {ObservableReadonly, Resource} from 'voby';
+import type {ObservableReadonly, Resource} from 'renderer';
 
 const resource: Resource<Response> = useResource ( () => fetch ( 'https://my.api' ) );
 
@@ -1994,8 +1957,8 @@ type StoreOptions = {
 Usage:
 
 ```ts
-import type {StoreOptions} from 'voby';
-import {store} from 'voby';
+import type {StoreOptions} from 'renderer';
+import {store} from 'renderer';
 
 const createStore = <T> ( value: T, options?: StoreOptions ): T => {
   return store ( value, options );
@@ -2008,11 +1971,11 @@ Extra features and details.
 
 #### `Contributing`
 
-If you'd like to contribute to this repo you should take the following steps to install Voby locally:
+If you'd like to contribute to this repo you should take the following steps to install renderer locally:
 
 ```sh
-git clone https://github.com/vobyjs/voby.git
-cd voby
+git clone https://github.com/rendererjs/renderer.git
+cd renderer
 npm install
 npm run compile
 ```
@@ -2032,7 +1995,7 @@ npm run dev:benchmark
 
 The following globals are supported.
 
-- `VOBY`: if `true`, then Voby is used in the current client page. This is also used internally to detect if Voby has been loaded multiple times within the same page, which is not supported.
+- `renderer`: if `true`, then renderer is used in the current client page. This is also used internally to detect if renderer has been loaded multiple times within the same page, which is not supported.
 
 #### `JSX`
 
@@ -2056,13 +2019,13 @@ JSX is supported out of the box, as a rule of thumb it's very similar to how Rea
 
 #### `Tree Shaking`
 
-Voby is released as a tree-shakeable ESM module. The functions you don't use simply won't be included in the final bundle.
+renderer is released as a tree-shakeable ESM module. The functions you don't use simply won't be included in the final bundle.
 
 #### `TypeScript`
 
-There are two main actions needed to make Voby work with TypeScript.
+There are two main actions needed to make renderer work with TypeScript.
 
-1. Voby is an ESM-only framework, so you _might_ need to mark your package as ESM too in order to use it, you can do that by putting the following in your `package.json`:
+1. renderer is an ESM-only framework, so you _might_ need to mark your package as ESM too in order to use it, you can do that by putting the following in your `package.json`:
    ```
    "type": "module"
    ```
@@ -2071,13 +2034,13 @@ There are two main actions needed to make Voby work with TypeScript.
     {
       "compilerOptions": {
         "jsx": "react-jsx",
-        "jsxImportSource": "voby"
+        "jsxImportSource": "renderer"
       }
     }
    ```
 3. Optionally, if you don't want to use a bundler or if you are using a bundler for which a plugin hasn't been written yet you can just define a "React" variable in scope and just use the JSX transform for React:
    ```ts
-   import * as React from 'voby';
+   import * as React from 'renderer';
    ```
 
 ## Thanks

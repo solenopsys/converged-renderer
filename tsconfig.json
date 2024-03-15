@@ -1,10 +1,12 @@
 {
-  "extends": "tsex/tsconfig.json",
   "compilerOptions": {
+    "target": "ESNext",        
+    "module": "ESNext",         
+    "strict": true,           
     "isolatedModules": false,
-    "noImplicitAny": false,
     "noPropertyAccessFromIndexSignature": false,
-    "noUnusedParameters": false,
-    "target": "es2020"
+     "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUnusedParameters": false
   }
 }

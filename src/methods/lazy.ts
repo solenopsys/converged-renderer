@@ -1,64 +1,54 @@
-
 /* IMPORT */
 
-import useMemo from '~/hooks/use_memo';
-import useResolved from '~/hooks/use_resolved';
-import useResource from '~/hooks/use_resource';
-import creatElement from '~/methods/create_element';
-import resolve from '~/methods/resolve';
-import {once} from '~/utils/lang';
-import type {Child, LazyFetcher, LazyResult, ObservableReadonly} from '~/types';
+import useMemo from "../hooks/use_memo";
+import useResolved from "../hooks/use_resolved";
+import useResource from "../hooks/use_resource";
+import creatElement from "../methods/create_element";
+import resolve from "../methods/resolve";
+import { once } from "../utils/lang";
+import type {
+	Child,
+	LazyFetcher,
+	LazyResult,
+	ObservableReadonly,
+} from "../types";
 
 /* MAIN */
 
-const lazy = <P = {}> ( fetcher: LazyFetcher<P> ): LazyResult<P> => {
+const lazy = <P = {}>(fetcher: LazyFetcher<P>): LazyResult<P> => {
+	const fetcherOnce = once(fetcher);
 
-  const fetcherOnce = once ( fetcher );
+	const component = (props: P): ObservableReadonly<Child> => {
+		const resource = useResource(fetcherOnce);
 
-  const component = ( props: P ): ObservableReadonly<Child> => {
+		return useMemo(() => {
+			return useResolved(resource, ({ pending, error, value }) => {
+				if (pending) return;
 
-    const resource = useResource ( fetcherOnce );
+				if (error) throw error;
 
-    return useMemo ( () => {
+				const component = "default" in value ? value.default : value;
 
-      return useResolved ( resource, ({ pending, error, value }) => {
+				return resolve(creatElement<P>(component, props));
+			});
+		});
+	};
 
-        if ( pending ) return;
+	component.preload = (): Promise<void> => {
+		return new Promise<void>((resolve, reject) => {
+			const resource = useResource(fetcherOnce);
 
-        if ( error ) throw error;
+			useResolved(resource, ({ pending, error }) => {
+				if (pending) return;
 
-        const component = ( 'default' in value ) ? value.default : value;
+				if (error) return reject(error);
 
-        return resolve ( creatElement<P> ( component, props ) );
+				return resolve();
+			});
+		});
+	};
 
-      });
-
-    });
-
-  };
-
-  component.preload = (): Promise<void> => {
-
-    return new Promise<void> ( ( resolve, reject ) => {
-
-      const resource = useResource ( fetcherOnce );
-
-      useResolved ( resource, ({ pending, error }) => {
-
-        if ( pending ) return;
-
-        if ( error ) return reject ( error );
-
-        return resolve ();
-
-      });
-
-    });
-
-  };
-
-  return component;
-
+	return component;
 };
 
 /* EXPORT */

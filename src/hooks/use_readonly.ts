@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {readonly} from '~/oby';
+import { readonly } from "../reactive";
 
 /* EXPORT */
 

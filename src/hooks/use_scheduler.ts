@@ -1,56 +1,60 @@
-
 /* IMPORT */
 
-import useEffect from '~/hooks/use_effect';
-import useSuspended from '~/hooks/use_suspended';
-import $$ from '~/methods/SS';
-import untrack from '~/methods/untrack';
-import type {Disposer, FN, FunctionMaybe, ObservableMaybe} from '~/types';
+import useEffect from "../hooks/use_effect";
+import useSuspended from "../hooks/use_suspended";
+import $$ from "../methods/SS";
+import untrack from "../methods/untrack";
+import type { Disposer, FN, FunctionMaybe, ObservableMaybe } from "../types";
 
 /* MAIN */
 
-const useScheduler = <T, U> ({ loop, once, callback, cancel, schedule }: { loop?: FunctionMaybe<boolean>, once?: boolean, callback: ObservableMaybe<FN<[U]>>, cancel: FN<[T]>, schedule: (( callback: FN<[U]> ) => T) }) : Disposer => {
+const useScheduler = <T, U>({
+	loop,
+	once,
+	callback,
+	cancel,
+	schedule,
+}: {
+	loop?: FunctionMaybe<boolean>;
+	once?: boolean;
+	callback: ObservableMaybe<FN<[U]>>;
+	cancel: FN<[T]>;
+	schedule: (callback: FN<[U]>) => T;
+}): Disposer => {
+	let executed = false;
+	let suspended = useSuspended();
+	let tickId: T;
 
-  let executed = false;
-  let suspended = useSuspended ();
-  let tickId: T;
+	const work = (value: U): void => {
+		executed = true;
 
-  const work = ( value: U ): void => {
+		if ($$(loop)) tick();
 
-    executed = true;
+		$$(callback, false)(value);
+	};
 
-    if ( $$(loop) ) tick ();
+	const tick = (): void => {
+		tickId = untrack(() => schedule(work));
+	};
 
-    $$(callback, false)( value );
+	const dispose = (): void => {
+		untrack(() => cancel(tickId));
+	};
 
-  };
+	useEffect(
+		() => {
+			if (once && executed) return;
 
-  const tick = (): void => {
+			if (suspended()) return;
 
-    tickId = untrack ( () => schedule ( work ) );
+			tick();
 
-  };
+			return dispose;
+		},
+		{ suspense: false },
+	);
 
-  const dispose = (): void => {
-
-    untrack ( () => cancel ( tickId ) );
-
-  };
-
-  useEffect ( () => {
-
-    if ( once && executed ) return;
-
-    if ( suspended () ) return;
-
-    tick ();
-
-    return dispose;
-
-  }, { suspense: false } );
-
-  return dispose;
-
+	return dispose;
 };
 
 /* EXPORT */

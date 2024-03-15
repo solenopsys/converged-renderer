@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {isStore} from '~/oby';
+import { isStore } from "../reactive";
 
 /* EXPORT */
 

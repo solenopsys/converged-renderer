@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {resolve} from '~/oby';
+import { resolve } from "../reactive";
 
 /* EXPORT */
 

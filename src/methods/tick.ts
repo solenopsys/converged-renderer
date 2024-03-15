@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {tick} from '~/oby';
+import { tick } from "../reactive";
 
 /* EXPORT */
 

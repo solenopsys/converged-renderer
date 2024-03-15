@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {cleanup} from '~/oby';
+import { cleanup } from "../reactive";
 
 /* EXPORT */
 

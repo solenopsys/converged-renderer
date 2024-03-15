@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {boolean} from '~/oby';
+import { boolean } from "../reactive";
 
 /* EXPORT */
 

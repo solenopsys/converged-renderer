@@ -1,7 +1,6 @@
-
 /* IMPORT */
 
-import {isBatching} from '~/oby';
+import { isBatching } from "../reactive";
 
 /* EXPORT */
 

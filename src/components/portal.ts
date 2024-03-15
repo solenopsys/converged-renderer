@@ -1,52 +1,53 @@
-
 /* IMPORT */
 
-import useBoolean from '~/hooks/use_boolean';
-import useRenderEffect from '~/hooks/use_render_effect';
-import render from '~/methods/render';
-import $$ from '~/methods/SS';
-import {createHTMLNode} from '~/utils/creators';
-import {assign} from '~/utils/lang';
-import type {Child, ChildWithMetadata, FunctionMaybe} from '~/types';
+import useBoolean from "../hooks/use_boolean";
+import useRenderEffect from "../hooks/use_render_effect";
+import render from "../methods/render";
+import $$ from "../methods/SS";
+import { createHTMLNode } from "../utils/creators";
+import { assign } from "../utils/lang";
+import type { Child, ChildWithMetadata, FunctionMaybe } from "../types";
 
 /* MAIN */
 
-const Portal = ({ when = true, mount, wrapper, children }: { mount?: Child, when?: FunctionMaybe<boolean>, wrapper?: Child, children: Child }): ChildWithMetadata<{ portal: HTMLElement }> => {
+const Portal = ({
+	when = true,
+	mount,
+	wrapper,
+	children,
+}: {
+	mount?: Child;
+	when?: FunctionMaybe<boolean>;
+	wrapper?: Child;
+	children: Child;
+}): ChildWithMetadata<{ portal: HTMLElement }> => {
+	const portal = $$(wrapper) || createHTMLNode("div");
 
-  const portal = $$(wrapper) || createHTMLNode ( 'div' );
+	if (!(portal instanceof HTMLElement)) throw new Error("Invalid wrapper node");
 
-  if ( !( portal instanceof HTMLElement ) ) throw new Error ( 'Invalid wrapper node' );
+	const condition = useBoolean(when);
 
-  const condition = useBoolean ( when );
+	useRenderEffect(() => {
+		if (!$$(condition)) return;
 
-  useRenderEffect ( () => {
+		const parent = $$(mount) || document.body;
 
-    if ( !$$(condition) ) return;
+		if (!(parent instanceof Element)) throw new Error("Invalid mount node");
 
-    const parent = $$(mount) || document.body;
+		parent.insertBefore(portal, null);
 
-    if ( !( parent instanceof Element ) ) throw new Error ( 'Invalid mount node' );
+		return (): void => {
+			parent.removeChild(portal);
+		};
+	});
 
-    parent.insertBefore ( portal, null );
+	useRenderEffect(() => {
+		if (!$$(condition)) return;
 
-    return (): void => {
+		return render(children, portal);
+	});
 
-      parent.removeChild ( portal );
-
-    };
-
-  });
-
-  useRenderEffect ( () => {
-
-    if ( !$$(condition) ) return;
-
-    return render ( children, portal );
-
-  });
-
-  return assign ( () => $$(condition) || children, { metadata: { portal } } );
-
+	return assign(() => $$(condition) || children, { metadata: { portal } });
 };
 
 /* EXPORT */
