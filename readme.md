@@ -2053,4 +2053,4 @@ There are two main actions needed to make renderer work with TypeScript.
 
 ## License
 
-MIT © Fabio Spampinato
+MIT © Solenopsys Fondation
