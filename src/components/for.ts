@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { for as _for } from "../reactive";
+import { for as _for } from "@solenopsys/converged-reactive";
 import type {
 	Child,
 	FunctionMaybe,

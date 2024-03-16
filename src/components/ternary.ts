@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { ternary } from "../reactive";
+import { ternary } from "@solenopsys/converged-reactive";
 import type { Child, FunctionMaybe, ObservableReadonly } from "../types";
 
 /* MAIN */

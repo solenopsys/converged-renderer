@@ -7,7 +7,7 @@ import useRoot from "../hooks/use_root";
 import useSuspense from "../hooks/use_suspense";
 import resolve from "../methods/resolve";
 import $ from "../methods/S";
-import { with as _with } from "../reactive";
+import { with as _with } from "@solenopsys/converged-reactive";
 import type {
 	Child,
 	Disposer,

@@ -7,7 +7,7 @@ import {
 	SYMBOL_UNCACHED,
 	SYMBOL_UNTRACKED,
 	SYMBOL_UNTRACKED_UNWRAPPED,
-} from "./reactive";
+} from "@solenopsys/converged-reactive";
 import type { ContextData, Context, DirectiveData } from "./types";
 
 /* MAIN */

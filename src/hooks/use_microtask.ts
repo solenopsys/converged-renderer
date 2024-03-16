@@ -1,7 +1,7 @@
 /* IMPORT */
 
 import useCheapDisposed from "../hooks/use_cheap_disposed";
-import { with as _with } from "../reactive";
+import { with as _with } from "@solenopsys/converged-reactive";
 import type { Callback } from "../types";
 
 /* MAIN */

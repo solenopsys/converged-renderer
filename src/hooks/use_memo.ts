@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { memo } from "../reactive";
+import { memo } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

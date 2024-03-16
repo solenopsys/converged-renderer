@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { boolean } from "../reactive";
+import { boolean } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

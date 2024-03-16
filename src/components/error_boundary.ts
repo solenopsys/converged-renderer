@@ -1,7 +1,7 @@
 /* IMPORT */
 
 import untrack from "../methods/untrack";
-import { tryCatch } from "../reactive";
+import { tryCatch } from "@solenopsys/converged-reactive";
 import { isFunction } from "../utils/lang";
 import type { Callback, Child, FN, ObservableReadonly } from "../types";
 

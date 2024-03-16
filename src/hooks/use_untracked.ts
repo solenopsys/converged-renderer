@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { untracked } from "../reactive";
+import { untracked } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

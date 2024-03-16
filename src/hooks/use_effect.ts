@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { effect } from "../reactive";
+import { effect } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

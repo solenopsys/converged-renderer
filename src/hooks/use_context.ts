@@ -1,7 +1,7 @@
 /* IMPORT */
 
 import { CONTEXTS_DATA } from "../constants";
-import { context } from "../reactive";
+import { context } from "@solenopsys/converged-reactive";
 import { isNil } from "../utils/lang";
 import type { Context, ContextWithDefault } from "../types";
 

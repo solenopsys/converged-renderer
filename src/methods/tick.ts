@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { tick } from "../reactive";
+import { tick } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

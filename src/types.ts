@@ -92,7 +92,7 @@ type Disposer = () => void;
 
 type EffectFunction = () => Disposer | void;
 
-type EffectOptions = import("./reactive").EffectOptions;
+type EffectOptions = import("@solenopsys/converged-reactive").EffectOptions;
 
 type Element<T = Child> = () => T;
 
@@ -105,7 +105,7 @@ type Falsy<T = unknown> = Extract<
 	0 | -0 | 0n | -0n | "" | false | null | undefined | void
 >;
 
-type ForOptions = import("./reactive").ForOptions;
+type ForOptions = import("@solenopsys/converged-reactive").ForOptions;
 
 type FN<Arguments extends unknown[], Return extends unknown = void> = (
 	...args: Arguments
@@ -175,21 +175,25 @@ type LazyFetcher<P = {}> = () => Promise<
 
 type LazyResult<P = {}> = LazyComponent<P> & { preload: () => Promise<void> };
 
-type MemoOptions<T = unknown> = import("./reactive").MemoOptions<T>;
+type MemoOptions<T = unknown> =
+	import("@solenopsys/converged-reactive").MemoOptions<T>;
 
-type Observable<T = unknown> = import("./reactive").Observable<T>;
+type Observable<T = unknown> =
+	import("@solenopsys/converged-reactive").Observable<T>;
 
-type ObservableLike<T = unknown> = import("./reactive").ObservableLike<T>;
+type ObservableLike<T = unknown> =
+	import("@solenopsys/converged-reactive").ObservableLike<T>;
 
 type ObservableReadonly<T = unknown> =
-	import("./reactive").ObservableReadonly<T>;
+	import("@solenopsys/converged-reactive").ObservableReadonly<T>;
 
 type ObservableReadonlyLike<T = unknown> =
-	import("./reactive").ObservableReadonlyLike<T>;
+	import("@solenopsys/converged-reactive").ObservableReadonlyLike<T>;
 
 type ObservableMaybe<T = unknown> = Observable<T> | ObservableReadonly<T> | T;
 
-type ObservableOptions<T = unknown> = import("./reactive").ObservableOptions<T>;
+type ObservableOptions<T = unknown> =
+	import("@solenopsys/converged-reactive").ObservableOptions<T>;
 
 type PromiseMaybe<T = unknown> = Promise<T> | T;
 
@@ -233,7 +237,7 @@ type ResourceFunction<T = unknown> = {
 type Resource<T = unknown> = ObservableReadonly<ResourceStatic<T>> &
 	ResourceFunction<T>;
 
-type StoreOptions = import("./reactive").StoreOptions;
+type StoreOptions = import("@solenopsys/converged-reactive").StoreOptions;
 
 type Styles = FunctionMaybe<
 	| null

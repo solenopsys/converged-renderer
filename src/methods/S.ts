@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { observable } from "../reactive";
+import { observable } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

@@ -3,7 +3,7 @@
 import isObservable from "../methods/is_observable";
 import useGuarded from "../hooks/use_guarded";
 import useUntracked from "../hooks/use_untracked";
-import { ternary } from "../reactive";
+import { ternary } from "@solenopsys/converged-reactive";
 import { isComponent, isFunction, isTruthy } from "../utils/lang";
 import type {
 	Child,

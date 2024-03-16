@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { isObservable } from "../reactive";
+import { isObservable } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

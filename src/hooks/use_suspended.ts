@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { suspended } from "../reactive";
+import { suspended } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

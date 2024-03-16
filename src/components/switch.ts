@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { switch as _switch } from "../reactive";
+import { switch as _switch } from "@solenopsys/converged-reactive";
 import { assign, castArray } from "../utils/lang";
 import type {
 	Child,

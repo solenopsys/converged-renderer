@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { cleanup } from "../reactive";
+import { cleanup } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

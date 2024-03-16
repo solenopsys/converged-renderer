@@ -1,7 +1,7 @@
 {
   "name": "@solenopsys/converged-renderer",
   "description": "A high-performance renderer for building rich applications.",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "type": "module",
   "sideEffects": false,
   "main": "dist/index.js",
@@ -34,7 +34,11 @@
     "format": "bunx @biomejs/biome format src/* --write",
     "bundle": "bun build  src/index.ts --outfile dist/index.js  --external @solenopsys/converged-reactive ",
     "types": "bun dts-bundle-generator --no-check  --external-imports  @solenopsys/converged-reactive  --export-referenced-types -o dist/index.d.ts src/index.ts",
-    "package": "bun run format && bun run bundle &&  bun run  types && npm publish --access public"
+    "bundle-jsx": "bun build  src/jsx/runtime.ts --no-bundle --outfile dist/jsx/runtime.js  ",
+    "types-jsx": "cp  ./src/jsx/types.ts ./dist/jsx/runtime.d.ts",
+    "clean": "rm -rf dist",
+    "bundle-all":"bun run clean && bun run bundle &&  bun run  types && bun run bundle-jsx && bun run types-jsx",
+    "package": "bun run format && bun run bundle-all &&  npm publish --access public"
   },
   "dependencies": {
     "@solenopsys/converged-reactive": "^1.0.1",

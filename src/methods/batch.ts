@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { batch } from "../reactive";
+import { batch } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

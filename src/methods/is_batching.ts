@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { isBatching } from "../reactive";
+import { isBatching } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 

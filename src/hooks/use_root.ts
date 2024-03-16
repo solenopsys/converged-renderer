@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { root } from "../reactive";
+import { root } from "@solenopsys/converged-reactive";
 
 /* EXPORT */
 
