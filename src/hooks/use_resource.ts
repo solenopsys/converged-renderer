@@ -66,9 +66,10 @@ const useResource = <T>(
 	const resourceFunction: ResourceFunction<T> = {
 		pending: () => pending(),
 		error: () => error(),
-		value: () => resource().value,
-		latest: () => resource().latest,
+		value: () => resource()?.value,
+		latest: () => resource()?.latest,
 	};
+	// @ts-ignore
 	const resource = $<ResourceStatic<T>>(resourcePending);
 
 	useRenderEffect(() => {
@@ -114,6 +115,7 @@ const useResource = <T>(
 				if (isPromise(value)) {
 					onPending();
 
+					// @ts-ignore
 					value.then(onResolve, onReject).finally(onFinally);
 				} else {
 					onResolve(value);
@@ -128,6 +130,7 @@ const useResource = <T>(
 		fetch();
 	});
 
+	// @ts-ignore
 	return assign(useReadonly(resource), resourceFunction);
 };
 

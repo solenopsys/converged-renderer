@@ -32,7 +32,7 @@
   },
   "scripts": {
     "format": "bunx @biomejs/biome format src/* --write",
-    "bundle": "bun build  src/index.ts --outfile dist/index.js --minify --external @solenopsys/converged-reactive ",
+    "bundle": "bun build  src/index.ts --outfile dist/index.js  --external @solenopsys/converged-reactive ",
     "types": "bun dts-bundle-generator --no-check  --external-imports  @solenopsys/converged-reactive  --export-referenced-types -o dist/index.d.ts src/index.ts",
     "package": "bun run format && bun run bundle &&  bun run  types && npm publish --access public"
   },

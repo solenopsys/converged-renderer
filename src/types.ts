@@ -181,7 +181,8 @@ type Observable<T = unknown> = import("./reactive").Observable<T>;
 
 type ObservableLike<T = unknown> = import("./reactive").ObservableLike<T>;
 
-type ObservableReadonly<T = unknown> = import("./reactive").ObservableReadonly<T>;
+type ObservableReadonly<T = unknown> =
+	import("./reactive").ObservableReadonly<T>;
 
 type ObservableReadonlyLike<T = unknown> =
 	import("./reactive").ObservableReadonlyLike<T>;

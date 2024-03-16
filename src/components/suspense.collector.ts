@@ -15,7 +15,8 @@ const SuspenseCollector = {
 		//TODO: Optimize this, some parts are unnecessarily slow, we just need a counter of active suspenses here really
 
 		const parent = SuspenseCollector.get();
-		const suspenses = $<SuspenseData[]>([]);
+		// @ts-ignore
+		const suspenses: any = $<SuspenseData[]>([]);
 		const active = useMemo(() =>
 			suspenses().some((suspense) => suspense.active()),
 		);

@@ -1,5 +1,4 @@
- 
- import {tryCatch} from '@solenopsys/converged-reactive';
+import { tryCatch } from "@solenopsys/converged-reactive";
 
-export * from '@solenopsys/converged-reactive';
-export {tryCatch};
+export * from "@solenopsys/converged-reactive";
+export { tryCatch };
