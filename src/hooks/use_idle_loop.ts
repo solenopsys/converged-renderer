@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import useScheduler from "../hooks/use_scheduler";
+import useScheduler from "./use_scheduler";
 import $$ from "../methods/SS";
 import type { Disposer, FunctionMaybe, ObservableMaybe } from "../types";
 

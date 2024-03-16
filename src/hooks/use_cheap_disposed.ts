@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { useCleanup } from "../hooks";
+import { useCleanup } from "./index";
 
 /* MAIN */
 

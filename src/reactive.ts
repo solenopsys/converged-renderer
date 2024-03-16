@@ -1,3 +1,5 @@
-/* EXPORT */
+ 
+ import {tryCatch} from '@solenopsys/converged-reactive';
 
-export * from "../../converged-reactive/src/index";
+export * from '@solenopsys/converged-reactive';
+export {tryCatch};

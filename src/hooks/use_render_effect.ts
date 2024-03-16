@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import useEffect from "../hooks/use_effect";
+import useEffect from "./use_effect";
 import type { Disposer, EffectFunction, EffectOptions } from "../types";
 
 /* HELPERS */

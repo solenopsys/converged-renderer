@@ -1,7 +1,7 @@
 /* IMPORT */
 
-import useEffect from "../hooks/use_effect";
-import useSuspended from "../hooks/use_suspended";
+import useEffect from "./use_effect";
+import useSuspended from "./use_suspended";
 import $$ from "../methods/SS";
 import untrack from "../methods/untrack";
 import type { Disposer, FN, FunctionMaybe, ObservableMaybe } from "../types";

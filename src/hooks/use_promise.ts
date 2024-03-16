@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import useResource from "../hooks/use_resource";
+import useResource from "./use_resource";
 import $$ from "../methods/SS";
 import type { FunctionMaybe, Resource } from "../types";
 

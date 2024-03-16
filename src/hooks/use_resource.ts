@@ -1,9 +1,9 @@
 /* IMPORT */
 
 import SuspenseManager from "../components/suspense.manager";
-import useCheapDisposed from "../hooks/use_cheap_disposed";
-import useReadonly from "../hooks/use_readonly";
-import useRenderEffect from "../hooks/use_render_effect";
+import useCheapDisposed from "./use_cheap_disposed";
+import useReadonly from "./use_readonly";
+import useRenderEffect from "./use_render_effect";
 import $ from "../methods/S";
 import $$ from "../methods/SS";
 import { assign, castError, isPromise } from "../utils/lang";

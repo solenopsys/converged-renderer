@@ -31,15 +31,17 @@
     }
   },
   "scripts": {
-    "bundle": "bun build src/index.ts  --outfile=renderer.js --minify",
-    "format": "prettier --write ./src",
-    "publish": "npm publish --access public"
+    "format": "bunx @biomejs/biome format src/* --write",
+    "bundle": "bun build  src/index.ts --outfile dist/index.js --minify --external @solenopsys/converged-reactive ",
+    "types": "bun dts-bundle-generator --no-check  --external-imports  @solenopsys/converged-reactive  --export-referenced-types -o dist/index.d.ts src/index.ts",
+    "package": "bun run format && bun run bundle &&  bun run  types && npm publish --access public"
   },
   "dependencies": {
+    "@solenopsys/converged-reactive": "^1.0.1",
+    "dts-bundle-generator": "^9.3.1",
     "htm": "^3.1.1"
   },
   "devDependencies": {
-    "@types/bun": "latest", 
     "@biomejs/biome": "1.6.1",
     "typescript": "latest"
   }

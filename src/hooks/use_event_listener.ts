@@ -1,7 +1,7 @@
 /* IMPORT */
 
-import useEffect from "../hooks/use_effect";
-import useResolved from "../hooks/use_resolved";
+import useEffect from "./use_effect";
+import useResolved from "./use_resolved";
 import $$ from "../methods/SS";
 import { castArray } from "../utils/lang";
 import type {

@@ -1,37 +1,40 @@
+
 /* IMPORT */
 
-import useMemo from "../hooks/use_memo";
-import $$ from "../methods/SS";
-import { isNil } from "../utils/lang";
-import type { FunctionMaybe } from "../types";
+import useMemo from './use_memo';
+import $$ from '../methods/SS';
+import {isNil} from '../utils/lang';
+import type {FunctionMaybe} from '../types';
 
 /* MAIN */
 
 //TODO: Maybe port this to reactive, as "when" or "is" or "guarded"
 //TODO: Optimize this, checking if the value is actually potentially reactive
 
-const useGuarded = <T, U extends T>(
-	value: FunctionMaybe<T>,
-	guard: (value: T) => value is U,
-): (() => U) => {
-	let valueLast: U | undefined;
+const useGuarded = <T, U extends T> ( value: FunctionMaybe<T>, guard: (( value: T ) => value is U) ): (() => U) => {
 
-	const guarded = useMemo(() => {
-		const current = $$(value);
+  let valueLast: U | undefined;
 
-		if (!guard(current)) return valueLast;
+  const guarded = useMemo ( () => {
 
-		return (valueLast = current);
-	});
+    const current = $$(value);
 
-	return (): U => {
-		const current = guarded();
+    if ( !guard ( current ) ) return valueLast;
 
-		if (isNil(current))
-			throw new Error("The value never passed the type guard");
+    return valueLast = current;
 
-		return current;
-	};
+  });
+
+  return (): U => {
+
+    const current = guarded ();
+
+    if ( isNil ( current ) ) throw new Error ( 'The value never passed the type guard' );
+
+    return current;
+
+  };
+
 };
 
 /* EXPORT */
