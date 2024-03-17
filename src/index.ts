@@ -25,6 +25,8 @@ export * from "./components/index";
 export * from "./jsx/runtime";
 export * from "./hooks/index";
 export * from "./methods/index";
+export * from "./plugins/index";
+
 export type {
 	Context,
 	Directive,
