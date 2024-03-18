@@ -31,7 +31,7 @@
     }
   },
   "scripts": {
-    "format": "bunx @biomejs/biome format src/* --write",
+    "format": "bunx @biomejs/biome format src/**/*.ts --write",
     "bundle": "bun build  src/index.ts --outfile dist/index.js  --external @solenopsys/converged-reactive ",
     "types": "bun dts-bundle-generator --no-check  --external-imports  @solenopsys/converged-reactive  --export-referenced-types -o dist/index.d.ts src/index.ts",
     "bundle-jsx": "bun build  src/jsx/runtime.ts --no-bundle --outfile dist/jsx/runtime.js  ",

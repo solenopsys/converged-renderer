@@ -13,7 +13,7 @@ import { classesToggle } from "../utils/classlist";
 import { createText, createComment } from "../utils/creators";
 import diff from "../utils/diff";
 import FragmentUtils from "../utils/fragment";
-import {classListernerCallback} from "../plugins/classes";
+import { classListernerCallback } from "../plugins/classes";
 import {
 	castArray,
 	flatten,
@@ -432,7 +432,6 @@ const setClassesStatic = (
 		| FunctionMaybe<null | undefined | boolean | string>[]
 		| Record<string, FunctionMaybe<null | undefined | boolean>>,
 ): void => {
-	
 	if (isString(object)) {
 		if (isSVG(element)) {
 			element.setAttribute("class", object);
@@ -993,4 +992,3 @@ export {
 	setProp,
 	setProps,
 };
-	 
