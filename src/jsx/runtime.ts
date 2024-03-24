@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import "./types";
+export * from "./types";
 import Fragment from "../components/fragment";
 import createElement from "../methods/create_element";
 import type { Component, Element } from "../types";
@@ -12,5 +12,4 @@ const jsx = <P = {}>(component: Component<P>, props?: P | null): Element => {
 };
 
 /* EXPORT */
-
 export { jsx, jsx as jsxs, jsx as jsxDEV, Fragment };

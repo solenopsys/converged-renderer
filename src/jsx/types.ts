@@ -2,21 +2,21 @@
 
 /* GLOBALS */
 
-interface Element {
+export interface Element {
 	cloneNode(deep?: boolean): Element;
 }
 
-interface HTMLElement {
+export interface HTMLElement extends EventTarget {
 	cloneNode(deep?: boolean): HTMLElement;
 }
 
-interface SVGElement {
+export interface SVGElement extends EventTarget {
 	cloneNode(deep?: boolean): SVGElement;
 }
 
 /* JSX */
 
-declare namespace JSX {
+export namespace JSX {
 	/* HELPERS */
 
 	type ArrayMaybe<T = unknown> = T[] | T;
@@ -81,7 +81,7 @@ declare namespace JSX {
 		>
 	>;
 
-	type Component<P = {}> = (props: P) => Child;
+	export type Component<P = {}> = (props: P) => Child;
 
 	type Element = Child;
 
@@ -100,9 +100,9 @@ declare namespace JSX {
 	type IntrinsicElement<T extends keyof IntrinsicElements> =
 		IntrinsicElements[T];
 
-	interface ClassProperties extends AllClassProperties {}
+	export interface ClassProperties extends AllClassProperties {}
 
-	interface StyleProperties extends DOMCSSProperties, DOMCSSVariables {
+	export interface StyleProperties extends DOMCSSProperties, DOMCSSVariables {
 		zoom?: FunctionMaybe<Nullable<string | number>>;
 	}
 
@@ -193,17 +193,17 @@ declare namespace JSX {
 		TargetedWheelEvent<T>
 	>;
 
-	interface ElementAttributesProperty {
+	export interface ElementAttributesProperty {
 		props: Record<string, any>;
 	}
 
-	interface ElementChildrenAttribute {
+	export interface ElementChildrenAttribute {
 		children: any;
 	}
 
-	interface IntrinsicAttributes {}
+	export interface IntrinsicAttributes {}
 
-	interface AriaAttributes {
+	export interface AriaAttributes {
 		ariaActiveDescendant?: FunctionMaybe<Nullable<string>>;
 		ariaAtomic?: FunctionMaybe<Nullable<boolean | "true" | "false">>;
 		ariaAutoComplete?: FunctionMaybe<
@@ -300,7 +300,7 @@ declare namespace JSX {
 		ariaValueText?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface Directives {
+	export interface Directives {
 		//FIXME: remove these internal directives https://github.com/microsoft/TypeScript/issues/49536
 		__converged_internal1__: [];
 		__converged_internal2__: [];
@@ -315,7 +315,7 @@ declare namespace JSX {
 			: Directives[Directive];
 	};
 
-	interface EventAttributes<T extends EventTarget> {
+	export interface EventAttributes<T extends EventTarget> {
 		/* IMAGE EVENTS */
 		onLoad?: ObservableMaybe<Nullable<GenericEventHandler<T>>>;
 		onLoadCapture?: ObservableMaybe<Nullable<GenericEventHandler<T>>>;
@@ -529,16 +529,17 @@ declare namespace JSX {
 		>;
 	}
 
-	interface ViewAttributes {
+	export interface ViewAttributes {
 		children?: Children;
 		dangerouslySetInnerHTML?: FunctionMaybe<{
 			__html: FunctionMaybe<Nullable<string>>;
 		}>;
 	}
 
-	interface DOMAttributes<T extends EventTarget> extends EventAttributes<T> {}
+	export interface DOMAttributes<T extends EventTarget>
+		extends EventAttributes<T> {}
 
-	interface VoidHTMLAttributes<T extends EventTarget>
+	export interface VoidHTMLAttributes<T extends EventTarget>
 		extends AriaAttributes,
 			DOMAttributes<T>,
 			DirectiveAttributes {
@@ -820,11 +821,11 @@ declare namespace JSX {
 		itemRef?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface HTMLAttributes<T extends EventTarget>
+	export interface HTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T>,
 			ViewAttributes {}
 
-	interface SVGAttributes<T extends EventTarget = SVGElement>
+	export interface SVGAttributes<T extends EventTarget = SVGElement>
 		extends HTMLAttributes<T>,
 			DirectiveAttributes {
 		ref?: Refs<T>;
@@ -1098,7 +1099,7 @@ declare namespace JSX {
 		"xmlns:xlink"?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface AnchorHTMLAttributes<T extends EventTarget>
+	export interface AnchorHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		download?: FunctionMaybe<Nullable<boolean>>;
 		href?: FunctionMaybe<Nullable<string>>;
@@ -1111,10 +1112,10 @@ declare namespace JSX {
 		referrerPolicy?: FunctionMaybe<Nullable<HTMLAttributeReferrerPolicy>>;
 	}
 
-	interface AudioHTMLAttributes<T extends EventTarget>
+	export interface AudioHTMLAttributes<T extends EventTarget>
 		extends MediaHTMLAttributes<T> {}
 
-	interface AreaHTMLAttributes<T extends EventTarget>
+	export interface AreaHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		alt?: FunctionMaybe<Nullable<string>>;
 		coords?: FunctionMaybe<Nullable<string>>;
@@ -1128,21 +1129,21 @@ declare namespace JSX {
 		target?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface BaseHTMLAttributes<T extends EventTarget>
+	export interface BaseHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		href?: FunctionMaybe<Nullable<string>>;
 		target?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface BlockquoteHTMLAttributes<T extends EventTarget>
+	export interface BlockquoteHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		cite?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface BrHTMLAttributes<T extends EventTarget>
+	export interface BrHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {}
 
-	interface ButtonHTMLAttributes<T extends EventTarget>
+	export interface ButtonHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		autoFocus?: FunctionMaybe<Nullable<boolean>>;
 		disabled?: FunctionMaybe<Nullable<boolean>>;
@@ -1157,45 +1158,46 @@ declare namespace JSX {
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface CanvasHTMLAttributes<T extends EventTarget>
+	export interface CanvasHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		height?: FunctionMaybe<Nullable<number | string>>;
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface ColHTMLAttributes<T extends EventTarget>
+	export interface ColHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		span?: FunctionMaybe<Nullable<number>>;
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface ColgroupHTMLAttributes<T extends EventTarget>
+	export interface ColgroupHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		span?: FunctionMaybe<Nullable<number>>;
 	}
 
-	interface DataHTMLAttributes<T extends EventTarget>
+	export interface DataHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface DetailsHTMLAttributes<T extends EventTarget>
+	export interface DetailsHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		open?: FunctionMaybe<Nullable<boolean>>;
 		onToggle?: ObservableMaybe<Nullable<GenericEventHandler<T>>>;
 	}
 
-	interface DelHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface DelHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		cite?: FunctionMaybe<Nullable<string>>;
 		dateTime?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface DialogHTMLAttributes<T extends EventTarget>
+	export interface DialogHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		open?: FunctionMaybe<Nullable<boolean>>;
 	}
 
-	interface EmbedHTMLAttributes<T extends EventTarget>
+	export interface EmbedHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		height?: FunctionMaybe<Nullable<number | string>>;
 		src?: FunctionMaybe<Nullable<string>>;
@@ -1203,14 +1205,14 @@ declare namespace JSX {
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface FieldsetHTMLAttributes<T extends EventTarget>
+	export interface FieldsetHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		disabled?: FunctionMaybe<Nullable<boolean>>;
 		form?: FunctionMaybe<Nullable<string>>;
 		name?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface FormHTMLAttributes<T extends EventTarget>
+	export interface FormHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		acceptCharset?: FunctionMaybe<Nullable<string>>;
 		action?: FunctionMaybe<Nullable<string>>;
@@ -1222,15 +1224,15 @@ declare namespace JSX {
 		target?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface HrHTMLAttributes<T extends EventTarget>
+	export interface HrHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {}
 
-	interface HtmlHTMLAttributes<T extends EventTarget>
+	export interface HtmlHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		manifest?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface IframeHTMLAttributes<T extends EventTarget>
+	export interface IframeHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		allow?: FunctionMaybe<Nullable<string>>;
 		allowFullScreen?: FunctionMaybe<Nullable<boolean>>;
@@ -1254,7 +1256,7 @@ declare namespace JSX {
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface ImgHTMLAttributes<T extends EventTarget>
+	export interface ImgHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		alt?: FunctionMaybe<Nullable<string>>;
 		crossOrigin?: FunctionMaybe<Nullable<"anonymous" | "use-credentials" | "">>;
@@ -1269,12 +1271,13 @@ declare namespace JSX {
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface InsHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface InsHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		cite?: FunctionMaybe<Nullable<string>>;
 		dateTime?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface InputHTMLAttributes<T extends EventTarget>
+	export interface InputHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		accept?: FunctionMaybe<Nullable<string>>;
 		alt?: FunctionMaybe<Nullable<string>>;
@@ -1342,7 +1345,7 @@ declare namespace JSX {
 		onChange?: ObservableMaybe<Nullable<KeyboardEventHandler<T>>>;
 	}
 
-	interface KeygenHTMLAttributes<T extends EventTarget>
+	export interface KeygenHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		autoFocus?: FunctionMaybe<Nullable<boolean>>;
 		challenge?: FunctionMaybe<Nullable<string>>;
@@ -1353,18 +1356,19 @@ declare namespace JSX {
 		name?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface LabelHTMLAttributes<T extends EventTarget>
+	export interface LabelHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		form?: FunctionMaybe<Nullable<string>>;
 		htmlFor?: FunctionMaybe<Nullable<string>>;
 		for?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface LiHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface LiHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface LinkHTMLAttributes<T extends EventTarget>
+	export interface LinkHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		as?: FunctionMaybe<Nullable<string>>;
 		crossOrigin?: FunctionMaybe<Nullable<string>>;
@@ -1380,16 +1384,17 @@ declare namespace JSX {
 		charSet?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface MapHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface MapHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		name?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface MenuHTMLAttributes<T extends EventTarget>
+	export interface MenuHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		type?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface MediaHTMLAttributes<T extends EventTarget>
+	export interface MediaHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		autoPlay?: FunctionMaybe<Nullable<boolean>>;
 		controls?: FunctionMaybe<Nullable<boolean>>;
@@ -1403,7 +1408,7 @@ declare namespace JSX {
 		src?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface MetaHTMLAttributes<T extends EventTarget>
+	export interface MetaHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		charSet?: FunctionMaybe<Nullable<string>>;
 		content?: FunctionMaybe<Nullable<string>>;
@@ -1412,7 +1417,7 @@ declare namespace JSX {
 		media?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface MeterHTMLAttributes<T extends EventTarget>
+	export interface MeterHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		form?: FunctionMaybe<Nullable<string>>;
 		high?: FunctionMaybe<Nullable<number>>;
@@ -1423,12 +1428,12 @@ declare namespace JSX {
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface QuoteHTMLAttributes<T extends EventTarget>
+	export interface QuoteHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		cite?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface ObjectHTMLAttributes<T extends EventTarget>
+	export interface ObjectHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		classID?: FunctionMaybe<Nullable<string>>;
 		data?: FunctionMaybe<Nullable<string>>;
@@ -1441,19 +1446,20 @@ declare namespace JSX {
 		wmode?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface OlHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface OlHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		reversed?: FunctionMaybe<Nullable<boolean>>;
 		start?: FunctionMaybe<Nullable<number>>;
 		type?: FunctionMaybe<Nullable<"1" | "a" | "A" | "i" | "I">>;
 	}
 
-	interface OptgroupHTMLAttributes<T extends EventTarget>
+	export interface OptgroupHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		disabled?: FunctionMaybe<Nullable<boolean>>;
 		label?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface OptionHTMLAttributes<T extends EventTarget>
+	export interface OptionHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		disabled?: FunctionMaybe<Nullable<boolean>>;
 		label?: FunctionMaybe<Nullable<string>>;
@@ -1461,7 +1467,7 @@ declare namespace JSX {
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface OutputHTMLAttributes<T extends EventTarget>
+	export interface OutputHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		form?: FunctionMaybe<Nullable<string>>;
 		htmlFor?: FunctionMaybe<Nullable<string>>;
@@ -1469,24 +1475,24 @@ declare namespace JSX {
 		name?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface ParamHTMLAttributes<T extends EventTarget>
+	export interface ParamHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		name?: FunctionMaybe<Nullable<string>>;
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface ProgressHTMLAttributes<T extends EventTarget>
+	export interface ProgressHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		max?: FunctionMaybe<Nullable<number | string>>;
 		value?: FunctionMaybe<Nullable<string | ReadonlyArray<string> | number>>;
 	}
 
-	interface SlotHTMLAttributes<T extends EventTarget>
+	export interface SlotHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		name?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface ScriptHTMLAttributes<T extends EventTarget>
+	export interface ScriptHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		async?: FunctionMaybe<Nullable<boolean>>;
 		/** @deprecated */
@@ -1501,7 +1507,7 @@ declare namespace JSX {
 		type?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface SelectHTMLAttributes<T extends EventTarget>
+	export interface SelectHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		autoComplete?: FunctionMaybe<Nullable<string>>;
 		autoFocus?: FunctionMaybe<Nullable<boolean>>;
@@ -1515,7 +1521,7 @@ declare namespace JSX {
 		onChange?: ObservableMaybe<Nullable<KeyboardEventHandler<T>>>;
 	}
 
-	interface SourceHTMLAttributes<T extends EventTarget>
+	export interface SourceHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		height?: FunctionMaybe<Nullable<number | string>>;
 		media?: FunctionMaybe<Nullable<string>>;
@@ -1526,7 +1532,7 @@ declare namespace JSX {
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface StyleHTMLAttributes<T extends EventTarget>
+	export interface StyleHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		media?: FunctionMaybe<Nullable<string>>;
 		nonce?: FunctionMaybe<Nullable<string>>;
@@ -1534,7 +1540,7 @@ declare namespace JSX {
 		type?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface TableHTMLAttributes<T extends EventTarget>
+	export interface TableHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		cellPadding?: FunctionMaybe<Nullable<number | string>>;
 		cellSpacing?: FunctionMaybe<Nullable<number | string>>;
@@ -1542,7 +1548,7 @@ declare namespace JSX {
 		width?: FunctionMaybe<Nullable<number | string>>;
 	}
 
-	interface TextareaHTMLAttributes<T extends EventTarget>
+	export interface TextareaHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		autoComplete?: FunctionMaybe<Nullable<string>>;
 		autoFocus?: FunctionMaybe<Nullable<boolean>>;
@@ -1562,7 +1568,8 @@ declare namespace JSX {
 		onChange?: ObservableMaybe<Nullable<KeyboardEventHandler<T>>>;
 	}
 
-	interface TdHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface TdHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		align?: FunctionMaybe<
 			Nullable<"left" | "center" | "right" | "justify" | "char">
 		>;
@@ -1576,7 +1583,8 @@ declare namespace JSX {
 		valign?: FunctionMaybe<Nullable<"top" | "middle" | "bottom" | "baseline">>;
 	}
 
-	interface ThHTMLAttributes<T extends EventTarget> extends HTMLAttributes<T> {
+	export interface ThHTMLAttributes<T extends EventTarget>
+		extends HTMLAttributes<T> {
 		align?: FunctionMaybe<
 			Nullable<"left" | "center" | "right" | "justify" | "char">
 		>;
@@ -1587,12 +1595,12 @@ declare namespace JSX {
 		abbr?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface TimeHTMLAttributes<T extends EventTarget>
+	export interface TimeHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		dateTime?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface TrackHTMLAttributes<T extends EventTarget>
+	export interface TrackHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {
 		default?: FunctionMaybe<Nullable<boolean>>;
 		kind?: FunctionMaybe<Nullable<string>>;
@@ -1601,7 +1609,7 @@ declare namespace JSX {
 		srcLang?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface VideoHTMLAttributes<T extends EventTarget>
+	export interface VideoHTMLAttributes<T extends EventTarget>
 		extends MediaHTMLAttributes<T> {
 		height?: FunctionMaybe<Nullable<number | string>>;
 		playsInline?: FunctionMaybe<Nullable<boolean>>;
@@ -1611,10 +1619,10 @@ declare namespace JSX {
 		disableRemotePlayback?: FunctionMaybe<Nullable<boolean>>;
 	}
 
-	interface WbrHTMLAttributes<T extends EventTarget>
+	export interface WbrHTMLAttributes<T extends EventTarget>
 		extends VoidHTMLAttributes<T> {}
 
-	interface WebViewHTMLAttributes<T extends EventTarget>
+	export interface WebViewHTMLAttributes<T extends EventTarget>
 		extends HTMLAttributes<T> {
 		allowFullScreen?: FunctionMaybe<Nullable<boolean>>;
 		allowpopups?: FunctionMaybe<Nullable<boolean>>;
@@ -1635,7 +1643,7 @@ declare namespace JSX {
 		webpreferences?: FunctionMaybe<Nullable<string>>;
 	}
 
-	interface IntrinsicElementsMap {
+	export interface IntrinsicElementsMap {
 		// HTML
 		a: HTMLAnchorElement;
 		abbr: HTMLElement;
@@ -1807,7 +1815,7 @@ declare namespace JSX {
 		use: SVGUseElement;
 	}
 
-	interface IntrinsicElements {
+	export interface IntrinsicElements {
 		// HTML
 		a: AnchorHTMLAttributes<HTMLAnchorElement>;
 		abbr: HTMLAttributes<HTMLElement>;

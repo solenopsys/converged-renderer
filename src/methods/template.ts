@@ -308,7 +308,7 @@ const template = <P = {}>(
 		const reviver = makeReviver(actionsWithPaths);
 
 		return (props: P): (() => Child) => {
-			const clone = root.cloneNode(true);
+			const clone = root.cloneNode(true) as HTMLElement;
 
 			return wrapElement(reviver.bind(undefined, clone, props));
 		};

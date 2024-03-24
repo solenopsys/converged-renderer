@@ -3,6 +3,8 @@
 import { DIRECTIVES, SYMBOLS_DIRECTIVES } from "../constants";
 import resolve from "../methods/resolve";
 import { context } from "@solenopsys/converged-reactive";
+
+import { JSX } from "../jsx/types";
 import type {
 	Child,
 	DirectiveFunction,

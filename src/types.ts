@@ -1,5 +1,7 @@
 /* HELPERS */
 
+import { JSX } from "./jsx/types";
+
 declare const ContextWithDefaultSymbol: unique symbol;
 
 /* MAIN */

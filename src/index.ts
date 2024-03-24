@@ -27,6 +27,10 @@ export * from "./hooks/index";
 export * from "./methods/index";
 export * from "./plugins/index";
 
+export { HTMLElement } from './jsx/types';
+export { SVGElement } from './jsx/types';
+export { Element } from './types';
+
 export type {
 	Context,
 	Directive,
