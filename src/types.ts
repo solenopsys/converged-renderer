@@ -4,6 +4,8 @@ import { JSX } from "./jsx/types";
 
 declare const ContextWithDefaultSymbol: unique symbol;
 
+type ComponentLink = string;
+
 /* MAIN */
 
 type ArrayMaybe<T = unknown> = T[] | T;
@@ -297,6 +299,7 @@ type Truthy<T = unknown> = Exclude<
 /* EXPORT */
 
 export type {
+	ComponentLink,
 	ArrayMaybe,
 	Callback,
 	Child,
