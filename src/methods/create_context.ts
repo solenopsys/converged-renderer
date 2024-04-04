@@ -1,7 +1,7 @@
 /* IMPORT */
 
 import { CONTEXTS_DATA } from "../constants";
-import resolve from "../methods/resolve";
+import resolve from "./resolve";
 import { context } from "@solenopsys/converged-reactive";
 import type { Child, Context, ContextWithDefault } from "../types";
 

@@ -1,26 +1,26 @@
 /* IMPORT */
 
-import $ from "../methods/S";
-import $$ from "../methods/SS";
-import batch from "../methods/batch";
-import createContext from "../methods/create_context";
-import createDirective from "../methods/create_directive";
-import createElement from "../methods/create_element";
-import h from "../methods/h";
-import hmr from "../methods/hmr";
-import html from "../methods/html";
-import isBatching from "../methods/is_batching";
-import isObservable from "../methods/is_observable";
-import isServer from "../methods/is_server";
-import isStore from "../methods/is_store";
-import lazy from "../methods/lazy";
-import render from "../methods/render";
-import renderToString from "../methods/render_to_string";
-import resolve from "../methods/resolve";
-import store from "../methods/store";
-import template from "../methods/template";
-import tick from "../methods/tick";
-import untrack from "../methods/untrack";
+import $ from "./S";
+import $$ from "./SS";
+import batch from "./batch";
+import createContext from "./create_context";
+import createDirective from "./create_directive";
+import createElement from "./create_element";
+import h from "./h";
+import hmr from "./hmr";
+import html from "./html";
+import isBatching from "./is_batching";
+import isObservable from "./is_observable";
+import isServer from "./is_server";
+import isStore from "./is_store";
+import lazy from "./lazy";
+import render from "./render";
+import renderToString from "./render_to_string";
+import resolve from "./resolve";
+import store from "./store";
+import template from "./template";
+import tick from "./tick";
+import untrack from "./untrack";
 
 /* EXPORT */
 

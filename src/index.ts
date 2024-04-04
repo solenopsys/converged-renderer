@@ -26,6 +26,7 @@ export * from "./jsx/runtime";
 export * from "./hooks/index";
 export * from "./methods/index";
 export * from "./plugins/index";
+export * from "./microfrontends/index";
 
 export { HTMLElement } from './jsx/types';
 export { SVGElement } from './jsx/types';

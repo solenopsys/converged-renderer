@@ -9,10 +9,10 @@ import store from "../methods/store";
 import untrack from "../methods/untrack";
 import { context, with as _with } from "@solenopsys/converged-reactive";
 import { SYMBOL_STORE_OBSERVABLE } from "@solenopsys/converged-reactive";
-import { classesToggle } from "../utils/classlist";
-import { createText, createComment } from "../utils/creators";
-import diff from "../utils/diff";
-import FragmentUtils from "../utils/fragment";
+import { classesToggle } from "./classlist";
+import { createText, createComment } from "./creators";
+import diff from "./diff";
+import FragmentUtils from "./fragment";
 import { classListernerCallback } from "../plugins/classes";
 import {
 	castArray,
@@ -25,8 +25,8 @@ import {
 	isString,
 	isSVG,
 	isTemplateAccessor,
-} from "../utils/lang";
-import { resolveChild, resolveClass, resolveStyle } from "../utils/resolvers";
+} from "./lang";
+import { resolveChild, resolveClass, resolveStyle } from "./resolvers";
 import type {
 	Child,
 	Classes,

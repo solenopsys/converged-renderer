@@ -1,7 +1,7 @@
 /* IMPORT */
 
 import { DIRECTIVES, SYMBOLS_DIRECTIVES } from "../constants";
-import resolve from "../methods/resolve";
+import resolve from "./resolve";
 import { context } from "@solenopsys/converged-reactive";
 
 import { JSX } from "../jsx/types";

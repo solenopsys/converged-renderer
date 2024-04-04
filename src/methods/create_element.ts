@@ -1,7 +1,7 @@
 /* IMPORT */
 
-import untrack from "../methods/untrack";
-import wrapElement from "../methods/wrap_element";
+import untrack from "./untrack";
+import wrapElement from "./wrap_element";
 import { createHTMLNode, createSVGNode } from "../utils/creators";
 import {
 	isFunction,
@@ -32,11 +32,12 @@ const createElement = <P = {}>(
 			  : _children;
 
 	if (isFunction(component)) {
+	
 		const props = rest;
 
 		if (!isNil(children)) props.children = children;
 		if (!isNil(ref)) props.ref = ref;
-
+	
 		return wrapElement(() => {
 			return untrack(() => component.call(component, props as P)); //TSC
 		});

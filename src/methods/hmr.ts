@@ -1,9 +1,9 @@
 /* IMPORT */
 
 import useMemo from "../hooks/use_memo";
-import $ from "../methods/S";
-import resolve from "../methods/resolve";
-import untrack from "../methods/untrack";
+import $ from "./S";
+import resolve from "./resolve";
+import untrack from "./untrack";
 import { isFunction } from "../utils/lang";
 import type { Observable, ObservableReadonly } from "../types";
 

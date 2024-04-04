@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import { isString } from "../utils/lang";
+import { isString } from "./lang";
 
 /* MAIN */
 

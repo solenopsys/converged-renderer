@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import createElement from "../methods/create_element";
+import createElement from "./create_element";
 import { isArray, isObject } from "../utils/lang";
 import type { Child, Component, Element } from "../types";
 

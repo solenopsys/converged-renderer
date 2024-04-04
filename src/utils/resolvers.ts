@@ -4,13 +4,13 @@ import { SYMBOL_UNCACHED } from "../constants";
 import isObservable from "../methods/is_observable";
 import useRenderEffect from "../hooks/use_render_effect";
 import $$ from "../methods/SS";
-import { createText } from "../utils/creators";
+import { createText } from "./creators";
 import {
 	isArray,
 	isFunction,
 	isFunctionReactive,
 	isString,
-} from "../utils/lang";
+} from "./lang";
 import type { Classes, ObservableMaybe, Styles } from "../types";
 
 /* MAIN */

@@ -34,7 +34,7 @@ This works similarly to [Solid](https://www.solidjs.com), but without a custom B
 | [`hmr`](#hmr)                         | [`Suspense`](#suspense)           | [`useReadonly`](#usereadonly)        | [`useIdleLoop`](#useidleloop)               | [`ObservableLike`](#observablelike)                 |                                 |
 | [`html`](#html)                       | [`Switch`](#switch)               | [`useResolved`](#useresolved)        | [`useInterval`](#useinterval)               | [`ObservableReadonly`](#observablereadonly)         |                                 |
 | [`isBatching`](#isbatching)           | [`Ternary`](#ternary)             | [`useResource`](#useresource)        | [`useMicrotask`](#usemicrotask)             | [`ObservableReadonlyLike`](#observablereadonlylike) |                                 |
-| [`isObservable`](#isobservable)       |                                   | [`useRoot`](#useroot)                | [`useTimeout`](#usetimeout)                 | [`ObservableMaybe`](#observablemaybe)               |                                 |
+| [`isObservable`](#isobservable)       |  [`DynamicLazy`](#dynamicLazy)                              | [`useRoot`](#useroot)                | [`useTimeout`](#usetimeout)                 | [`ObservableMaybe`](#observablemaybe)               |                                 |
 | [`isServer`](#isserver)               |                                   | [`useSelector`](#useselector)        |                                             | [`ObservableOptions`](#observableoptions)           |                                 |
 | [`isStore`](#isstore)                 |                                   | [`useSuspended`](#usesuspended)      |                                             | [`Resource`](#resource)                             |                                 |
 | [`lazy`](#lazy)                       |                                   | [`useUntracked`](#useuntracked)      |                                             | [`StoreOptions`](#storeoptions)                     |                                 |
@@ -718,6 +718,32 @@ const App = () => {
     <Dynamic component={heading}>
       Some content
     </Dynamic>
+  );
+};
+```
+
+
+#### `DynamicLazy`
+
+This component load component from module dynamically.
+
+Interface:
+
+```ts
+function DynamicLazy <P = {}> ( props: { component: "path [module]:[component]", props?: FunctionMaybe<P | null>, children?: JSX.Element }): JSX. Element;
+```
+
+Usage:
+
+```tsx
+import {Dynamic} from 'renderer';
+
+const App = () => {
+  const heading = 'h2';
+  return (
+    <DynamicLazy component={"@solenopsys/my-module:MyComponent"}>
+      Some content
+    </DynamicLazy>
   );
 };
 ```

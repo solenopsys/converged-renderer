@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import SuspenseContext from "../components/suspense.context";
+import SuspenseContext from "./suspense.context";
 import useCleanup from "../hooks/use_cleanup";
 import type { SuspenseData } from "../types";
 

@@ -1,6 +1,6 @@
 /* IMPORT */
 
-import SuspenseContext from "../components/suspense.context";
+import SuspenseContext from "./suspense.context";
 import useMemo from "../hooks/use_memo";
 import useSuspense from "../hooks/use_suspense";
 import resolve from "../methods/resolve";

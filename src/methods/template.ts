@@ -1,7 +1,7 @@
 /* IMPORT */
 
 import { SYMBOL_TEMPLATE_ACCESSOR } from "../constants";
-import wrapElement from "../methods/wrap_element";
+import wrapElement from "./wrap_element";
 import { assign, indexOf, isFunction, isString } from "../utils/lang";
 import {
 	setAttribute,

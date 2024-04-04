@@ -4,7 +4,7 @@ import Portal from "../components/portal";
 import SuspenseCollector from "../components/suspense.collector";
 import useEffect from "../hooks/use_effect";
 import useRoot from "../hooks/use_root";
-import $$ from "../methods/SS";
+import $$ from "./SS";
 import type { Child } from "../types";
 
 /* MAIN */
