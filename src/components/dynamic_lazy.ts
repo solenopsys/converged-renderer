@@ -8,7 +8,6 @@ import { resolveComponent } from "../microfrontends/cache";
 
 import type { Child, FunctionMaybe, ComponentLink } from "../types";
 
-
 const DynamicLazy = <P = {}>({
 	component,
 	props,

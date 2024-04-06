@@ -1,5 +1,3 @@
-import { Component } from "@solenopsys/converged-renderer";
-
 import type { ComponentLink, Observable } from "../types";
 import $ from "../methods/S";
 import { usePromise } from "../hooks";

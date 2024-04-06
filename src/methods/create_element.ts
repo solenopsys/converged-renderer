@@ -32,12 +32,11 @@ const createElement = <P = {}>(
 			  : _children;
 
 	if (isFunction(component)) {
-	
 		const props = rest;
 
 		if (!isNil(children)) props.children = children;
 		if (!isNil(ref)) props.ref = ref;
-	
+
 		return wrapElement(() => {
 			return untrack(() => component.call(component, props as P)); //TSC
 		});
